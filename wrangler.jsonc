@@ -1,9 +1,10 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "cloudflare-worker-starter",
-	"compatibility_date": "2025-01-29",
+	"compatibility_date": "2025-02-04",
 	"compatibility_flags": ["nodejs_compat"],
-	"main": "src/index.ts",
+	"main": "worker/index.ts",
+	"assets": {},
 	"observability": {
 		"enabled": true
 	},

@@ -71,7 +71,7 @@ yarn dev
 ├── tests/
 │   └── index.spec.ts    # Test files
 ├── .dev.vars            # Local development environment variables
-├── wrangler.json        # Cloudflare Workers configuration
+├── wrangler.jsonc        # Cloudflare Workers configuration
 ├── tsconfig.json        # TypeScript configuration
 └── package.json         # Project dependencies and scripts
 ```
@@ -79,7 +79,7 @@ yarn dev
 ## Environment Variables
 
 - Development environment variables can be set in `.dev.vars`
-- Production variables are configured in `wrangler.json` or through the Cloudflare dashboard
+- Production variables are configured in `wrangler.jsonc` or through the Cloudflare dashboard
 
 Example `.dev.vars`:
 
