@@ -17,8 +17,6 @@ class Rpc {
 	async hello({ message }: { message: string }) {
 		const { req } = context.get();
 
-		await new Promise(resolve => setTimeout(resolve, 1000));
-
 		try {
 			const session = await this.auth.authenticate(req.headers);
 
