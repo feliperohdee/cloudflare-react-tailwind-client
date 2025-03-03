@@ -24,7 +24,7 @@ const App = () => {
 				id: `loading-${index}`
 			});
 		} else if (data) {
-			toast.success('Connected to worker', {
+			toast.success(`Received from worker: ${data.message}`, {
 				id: `loading-${index}`
 			});
 		} else if (error) {
@@ -81,7 +81,7 @@ const App = () => {
 									</Button>
 								</div>
 								<div className='rounded border border-gray-700 bg-black p-4'>
-									<code className='font-mono text-sm text-gray-300'>
+									<code className='font-mono text-sm text-gray-300 overflow-hidden'>
 										git clone
 										https://github.com/feliperohdee/vite-starter.git
 									</code>
@@ -382,7 +382,7 @@ const App = () => {
 							</div>
 
 							{/* Action Buttons */}
-							<div className='flex gap-3'>
+							<div className='flex flex-wrap gap-3'>
 								<Button
 									className='flex-1 bg-blue-600 hover:bg-blue-700'
 									onClick={() => {

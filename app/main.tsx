@@ -12,8 +12,8 @@ createRoot(document.getElementById('root')!).render(
 		<App />
 		<MotionOverride />
 		<Toaster
-			richColors
 			expand
+			richColors
 		/>
 	</StrictMode>
 );
