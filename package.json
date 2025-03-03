@@ -20,7 +20,8 @@
 		"react-dom": "^19.0.0",
 		"sonner": "^2.0.1",
 		"typed-rpc": "^6.1.1",
-		"use-http-error": "^1.0.5"
+		"use-http-error": "^1.0.5",
+		"use-request-utils": "^1.0.7"
 	},
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "^0.1.7",

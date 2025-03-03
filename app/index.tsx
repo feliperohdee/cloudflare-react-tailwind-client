@@ -11,26 +11,28 @@ import { useEffect, useState } from 'react';
 
 import useRpc from '@/app/hooks/use-rpc';
 
-const WelcomePage = () => {
+const App = () => {
 	const [message, setMessage] = useState('Cloudflare');
 	const { resource, rpc } = useRpc();
-	const { data, fetch, loading, setData } = resource('hello', { message });
+	const { data, error, fetch, index, loading, setData } = resource('hello', {
+		message
+	});
 
 	useEffect(() => {
 		if (loading) {
 			toast.loading('Connecting to worker...', {
-				id: 'loading'
+				id: `loading-${index}`
 			});
-		} else {
-			toast.dismiss('loading');
-
-			if (data) {
-				toast.success(`Worker response: ${data.message}`, {
-					id: 'success'
-				});
-			}
+		} else if (data) {
+			toast.success('Connected to worker', {
+				id: `loading-${index}`
+			});
+		} else if (error) {
+			toast.error(`Worker error: ${error.toString()}`, {
+				id: `loading-${index}`
+			});
 		}
-	}, [loading, data, rpc]);
+	}, [loading, data, error, index, rpc]);
 
 	return (
 		<div className='min-h-screen bg-black text-gray-200'>
@@ -425,6 +427,43 @@ const WelcomePage = () => {
 								</Button>
 							</div>
 
+							<div className='flex gap-3'>
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									onClick={async () => {
+										const res = await rpc.signin({
+											email: 'test@test.com',
+											password: 'password'
+										});
+
+										toast.info(`Signed in: ${res.email}`, {
+											closeButton: true,
+											id: `signin-${index}`
+										});
+
+										setTimeout(fetch);
+									}}
+								>
+									Simulate Signin
+								</Button>
+
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									onClick={async () => {
+										await rpc.signout();
+
+										toast.info('Signed out', {
+											closeButton: true,
+											id: `signout-${index}`
+										});
+
+										setTimeout(fetch);
+									}}
+								>
+									Simulate Signout
+								</Button>
+							</div>
+
 							{/* Code Example */}
 							<div className='mt-6'>
 								<div className='mb-2 flex items-center justify-between'>
@@ -481,4 +520,4 @@ class Rpc {
 	);
 };
 
-export default WelcomePage;
+export default App;

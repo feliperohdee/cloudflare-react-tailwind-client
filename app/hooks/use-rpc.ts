@@ -68,6 +68,10 @@ const transport = (options: FetchOptions): RpcTransport => {
 	};
 };
 
+type RpcFunctions<T extends object> = {
+	[K in keyof T]: T[K];
+};
+
 const resourceFactory = ({
 	abort,
 	abortable,
@@ -77,7 +81,7 @@ const resourceFactory = ({
 	abort: (promise: Promise<any>) => void;
 	abortable: boolean;
 	debounceTime: number;
-	rpc: Rpc;
+	rpc: RpcFunctions<Rpc>;
 }) => {
 	return <T extends keyof Rpc>(method: T, ...args: Parameters<Rpc[T]>) => {
 		type Args = Parameters<Rpc[T]>;
@@ -90,11 +94,13 @@ const resourceFactory = ({
 		const [state, setState] = useState<{
 			data: Data | null;
 			error: HttpError | null;
+			index: number;
 			loading: boolean;
 			loaded: boolean;
 		}>({
 			data: null,
 			error: null,
+			index: 0,
 			loading: false,
 			loaded: false
 		});
@@ -118,6 +124,7 @@ const resourceFactory = ({
 						return {
 							...state,
 							error: null,
+							index: state.index + 1,
 							loading: true,
 							loaded: false
 						};
@@ -132,11 +139,15 @@ const resourceFactory = ({
 					);
 					currentPromise.current = promise;
 
-					setState({
-						data: await promise,
-						error: null,
-						loading: false,
-						loaded: true
+					const data = await promise;
+
+					setState(state => {
+						return {
+							...state,
+							data,
+							loading: false,
+							loaded: true
+						};
 					});
 				} catch (err) {
 					const httpError = HttpError.wrap(err as Error);
