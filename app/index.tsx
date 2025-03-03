@@ -1,119 +1,465 @@
-import { Card, CardContent } from '@/app/components/ui/card';
 import { Button } from '@/app/components/ui/button';
-import { Github, Code2, BookOpen } from 'lucide-react';
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle
+} from '@/app/components/ui/card';
+import { Github, Globe, Code2, BookOpen } from 'lucide-react';
+import { toast } from 'sonner';
+import { useEffect, useState } from 'react';
+
+import useRpc from '@/app/hooks/use-rpc';
 
 const WelcomePage = () => {
+	const [message, setMessage] = useState('Cloudflare');
+	const { resource, rpc } = useRpc();
+	const { data, fetch, loading, setData } = resource('hello', { message });
+
+	useEffect(() => {
+		if (loading) {
+			toast.loading('Connecting to worker...', {
+				id: 'loading'
+			});
+		} else {
+			toast.dismiss('loading');
+
+			if (data) {
+				toast.success(`Worker response: ${data.message}`, {
+					id: 'success'
+				});
+			}
+		}
+	}, [loading, data, rpc]);
+
 	return (
 		<div className='min-h-screen bg-black text-gray-200'>
 			<div className='container mx-auto px-4 py-16'>
 				{/* Simple Hero Section */}
-				<div className='mb-12 text-center'>
+				<div className='mx-auto mb-12 max-w-3xl text-center'>
 					<h1 className='mb-4 text-4xl font-bold'>
-						React/Tailwind Vite Starter
-						<span className='text-blue-500'> Project</span>
+						Modern Web Development with
+						<div className='text-blue-500'>
+							{' '}
+							Cloudflare Workers + React
+						</div>
 					</h1>
+
 					<p className='mb-8 text-gray-400'>
-						Build something amazing with React and Tailwind CSS
-						using Vite.
+						Jumpstart your next project with this powerful tech
+						stack combining Cloudflare's edge computing, React's UI
+						capabilities, and Tailwind's utility-first CSS—all
+						powered by Vite and type-safe RPC.
 					</p>
-					<div className='flex justify-center gap-4'>
-						<Button
-							asChild
-							className='bg-blue-600 hover:bg-blue-700'
-						>
-							<a href='https://github.com/feliperohdee/vite-starter/README.md'>
-								<Code2 className='mr-2 h-4 w-4' />
-								Get Started
-							</a>
-						</Button>
-						<Button
-							asChild
-							variant='secondary'
-						>
-							<a
-								href='https://ui.shadcn.com/docs/components'
-								target='_blank'
-								rel='noopener noreferrer'
-							>
-								<BookOpen className='mr-2 h-4 w-4' />
-								Components Docs
-							</a>
-						</Button>
-					</div>
 				</div>
 
 				{/* Installation Card */}
-				<Card className='mx-auto max-w-lg border-gray-800 bg-gray-900'>
-					<CardContent className='pt-6'>
-						<div className='space-y-4'>
-							<div>
-								<div className='rounded bg-black p-4'>
-									<code className='text-sm text-gray-300'>
+				<Card className='mx-auto max-w-3xl border-gray-800 bg-gray-900'>
+					<CardHeader className='border-b border-gray-800'>
+						<CardTitle className='flex items-center text-xl text-white'>
+							<Github className='mr-2 h-5 w-5 text-blue-500' />
+							Installation Guide
+						</CardTitle>
+					</CardHeader>
+
+					<CardContent className='p-6'>
+						<div className='space-y-5'>
+							{/* Clone Repository */}
+							<div className='rounded-lg border border-gray-800 bg-gray-950 p-5'>
+								<div className='mb-2 flex items-center justify-between'>
+									<h3 className='text-sm font-medium text-gray-300'>
+										1. Clone Repository
+									</h3>
+									<Button
+										variant='ghost'
+										size='sm'
+										className='h-7 text-xs text-gray-400 hover:text-gray-200'
+									>
+										Copy
+									</Button>
+								</div>
+								<div className='rounded border border-gray-700 bg-black p-4'>
+									<code className='font-mono text-sm text-gray-300'>
 										git clone
 										https://github.com/feliperohdee/vite-starter.git
 									</code>
 								</div>
-								<p className='mt-2 text-sm text-gray-400'>
+								<p className='mt-3 text-sm text-gray-400'>
 									Clone the repository to your local machine
-									using Git.
+									using Git to get started with the project.
 								</p>
 							</div>
 
-							<div>
-								<div className='rounded bg-black p-4'>
-									<code className='text-sm text-gray-300'>
+							{/* Install Dependencies */}
+							<div className='rounded-lg border border-gray-800 bg-gray-950 p-5'>
+								<div className='mb-2 flex items-center justify-between'>
+									<h3 className='text-sm font-medium text-gray-300'>
+										2. Install Dependencies
+									</h3>
+									<Button
+										variant='ghost'
+										size='sm'
+										className='h-7 text-xs text-gray-400 hover:text-gray-200'
+									>
+										Copy
+									</Button>
+								</div>
+								<div className='rounded border border-gray-700 bg-black p-4'>
+									<code className='font-mono text-sm text-gray-300'>
 										yarn install
 									</code>
 								</div>
-								<p className='mt-2 text-sm text-gray-400'>
+								<p className='mt-3 text-sm text-gray-400'>
 									Install all project dependencies, including
 									React, Tailwind CSS, and shadcn/ui base
 									components.
 								</p>
 							</div>
 
-							<div>
-								<div className='rounded bg-black p-4'>
-									<code className='text-sm text-gray-300'>
+							{/* Development Server */}
+							<div className='rounded-lg border border-gray-800 bg-gray-950 p-5'>
+								<div className='mb-2 flex items-center justify-between'>
+									<h3 className='text-sm font-medium text-gray-300'>
+										3. Start Development Server
+									</h3>
+									<Button
+										variant='ghost'
+										size='sm'
+										className='h-7 text-xs text-gray-400 hover:text-gray-200'
+									>
+										Copy
+									</Button>
+								</div>
+								<div className='rounded border border-gray-700 bg-black p-4'>
+									<code className='font-mono text-sm text-gray-300'>
 										yarn dev
 									</code>
 								</div>
-								<p className='mt-2 text-sm text-gray-400'>
+								<p className='mt-3 text-sm text-gray-400'>
 									Start the development server at
 									http://localhost:3000 with hot module
-									replacement.
+									replacement for real-time updates.
 								</p>
 							</div>
 
-							<div>
-								<div className='rounded bg-black p-4'>
-									<code className='text-sm text-gray-300'>
-										yarn lint
-									</code>
+							{/* Additional Commands */}
+							<div className='rounded-lg border border-gray-800 bg-gray-950 p-5'>
+								<h3 className='mb-3 text-sm font-medium text-gray-300'>
+									Additional Commands
+								</h3>
+
+								<div className='space-y-4'>
+									{/* Deploy Command */}
+									<div>
+										<div className='mb-2 flex items-center justify-between'>
+											<p className='text-xs font-medium text-gray-400'>
+												Deploy to Cloudflare
+											</p>
+											<Button
+												variant='ghost'
+												size='sm'
+												className='h-6 text-xs text-gray-400 hover:text-gray-200'
+											>
+												Copy
+											</Button>
+										</div>
+										<div className='rounded border border-gray-700 bg-black p-3'>
+											<code className='font-mono text-sm text-gray-300'>
+												yarn deploy
+											</code>
+										</div>
+										<p className='mt-2 text-xs text-gray-500'>
+											Build and deploy your app to
+											Cloudflare Workers.
+										</p>
+									</div>
+
+									{/* Test Command */}
+									<div>
+										<div className='mb-2 flex items-center justify-between'>
+											<p className='text-xs font-medium text-gray-400'>
+												Run Tests
+											</p>
+											<Button
+												variant='ghost'
+												size='sm'
+												className='h-6 text-xs text-gray-400 hover:text-gray-200'
+											>
+												Copy
+											</Button>
+										</div>
+										<div className='rounded border border-gray-700 bg-black p-3'>
+											<code className='font-mono text-sm text-gray-300'>
+												yarn test
+											</code>
+										</div>
+										<p className='mt-2 text-xs text-gray-500'>
+											Run tests using Vitest testing
+											framework.
+										</p>
+									</div>
+
+									{/* CF TypeGen Command */}
+									<div>
+										<div className='mb-2 flex items-center justify-between'>
+											<p className='text-xs font-medium text-gray-400'>
+												Generate Worker Types
+											</p>
+											<Button
+												variant='ghost'
+												size='sm'
+												className='h-6 text-xs text-gray-400 hover:text-gray-200'
+											>
+												Copy
+											</Button>
+										</div>
+										<div className='rounded border border-gray-700 bg-black p-3'>
+											<code className='font-mono text-sm text-gray-300'>
+												yarn cf-typegen
+											</code>
+										</div>
+										<p className='mt-2 text-xs text-gray-500'>
+											Generate TypeScript types for
+											Cloudflare Workers.
+										</p>
+									</div>
+
+									{/* Lint Command */}
+									<div>
+										<div className='mb-2 flex items-center justify-between'>
+											<p className='text-xs font-medium text-gray-400'>
+												Lint Code
+											</p>
+											<Button
+												variant='ghost'
+												size='sm'
+												className='h-6 text-xs text-gray-400 hover:text-gray-200'
+											>
+												Copy
+											</Button>
+										</div>
+										<div className='rounded border border-gray-700 bg-black p-3'>
+											<code className='font-mono text-sm text-gray-300'>
+												yarn lint
+											</code>
+										</div>
+										<p className='mt-2 text-xs text-gray-500'>
+											Run ESLint to check code quality and
+											maintain consistent style.
+										</p>
+									</div>
+
+									{/* Add Component Command */}
+									<div>
+										<div className='mb-2 flex items-center justify-between'>
+											<p className='text-xs font-medium text-gray-400'>
+												Add Component
+											</p>
+											<Button
+												variant='ghost'
+												size='sm'
+												className='h-6 text-xs text-gray-400 hover:text-gray-200'
+											>
+												Copy
+											</Button>
+										</div>
+										<div className='rounded border border-gray-700 bg-black p-3'>
+											<code className='font-mono text-sm text-gray-300'>
+												yarn add-component [name]
+											</code>
+										</div>
+										<p className='mt-2 text-xs text-gray-500'>
+											Install and configure shadcn/ui
+											components. Example:{' '}
+											<code className='text-xs text-gray-400'>
+												yarn add-component button
+											</code>
+										</p>
+										<p className='mt-1 text-xs text-gray-500'>
+											Available components: button, card,
+											dialog, dropdown-menu, input, label,
+											select, and more from shadcn/ui
+											collection.
+										</p>
+									</div>
 								</div>
-								<p className='mt-2 text-sm text-gray-400'>
-									Run ESLint to check code quality and
-									maintain consistent style.
-								</p>
 							</div>
 
-							<div>
-								<div className='rounded bg-black p-4'>
-									<code className='text-sm text-gray-300'>
-										yarn add-component [name]
-									</code>
+							{/* Quick Links */}
+							<div className='mt-6 flex flex-wrap gap-3'>
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									asChild
+								>
+									<a href='https://github.com/feliperohdee/vite-starter/blob/main/README.md'>
+										<BookOpen className='mr-2 h-4 w-4' />
+										Documentation
+									</a>
+								</Button>
+
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									asChild
+								>
+									<a href='https://developers.cloudflare.com/workers/'>
+										<Globe className='mr-2 h-4 w-4' />
+										Cloudflare Docs
+									</a>
+								</Button>
+
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									asChild
+								>
+									<a href='https://ui.shadcn.com/'>
+										<Code2 className='mr-2 h-4 w-4' />
+										shadcn/ui
+									</a>
+								</Button>
+							</div>
+						</div>
+					</CardContent>
+				</Card>
+
+				{/* RPC Communication Demo */}
+				<Card className='mx-auto mt-12 max-w-3xl border-gray-800 bg-gray-900'>
+					<CardHeader className='border-b border-gray-800'>
+						<CardTitle className='flex items-center text-xl text-white'>
+							<Code2 className='mr-2 h-5 w-5 text-blue-500' />
+							Type-Safe RPC Communication Demo
+						</CardTitle>
+					</CardHeader>
+
+					<CardContent className='p-6'>
+						<div className='space-y-5'>
+							{/* Input Field */}
+							<div className='rounded-lg border border-gray-800 bg-gray-950 p-5'>
+								<label
+									htmlFor='message'
+									className='mb-2 block text-sm font-medium text-gray-300'
+								>
+									Message to Worker
+								</label>
+
+								<input
+									id='message'
+									type='text'
+									value={message}
+									onChange={e => {
+										setMessage(e.target.value);
+									}}
+									className='w-full rounded border border-gray-700 bg-gray-900 p-2 text-sm text-gray-200 focus:ring-2 focus:ring-blue-500 focus:outline-none'
+									placeholder='Enter a message to send to the worker'
+								/>
+							</div>
+
+							{/* Live Response Panel */}
+							<div className='rounded-lg border border-gray-800 bg-black p-5'>
+								<div className='mb-3 flex items-center'>
+									<div
+										className={`mr-2 h-2 w-2 rounded-full ${loading ? 'animate-pulse bg-yellow-500' : 'bg-green-500'}`}
+									/>
+
+									<p className='text-sm font-medium text-gray-300'>
+										Status:{' '}
+										{loading
+											? 'Connecting to worker...'
+											: 'Connected'}
+									</p>
 								</div>
-								<p className='mt-2 text-sm text-gray-400'>
-									Install and configure shadcn/ui components.
-									Example:{' '}
-									<code className='text-gray-300'>
-										yarn add-component button
-									</code>
-								</p>
-								<p className='mt-1 text-sm text-gray-400'>
-									Available components: button, card, dialog,
-									dropdown-menu, input, label, select, and
-									more from shadcn/ui collection.
+								<div className='border-t border-gray-800 pt-3'>
+									<p className='mb-1 text-sm font-medium text-gray-400'>
+										Worker Response:
+									</p>
+									<p className='font-mono text-lg text-blue-400'>
+										{data
+											? data.message
+											: 'Waiting for response...'}
+									</p>
+								</div>
+							</div>
+
+							{/* Action Buttons */}
+							<div className='flex gap-3'>
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									onClick={() => {
+										fetch();
+									}}
+								>
+									Refetch
+								</Button>
+
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									onClick={() => {
+										fetch({ message: 'Custom Message' });
+									}}
+								>
+									Refetch w/ Custom Payload
+								</Button>
+
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									onClick={() => {
+										setData({
+											message: 'Hello, World!',
+											url: 'https://example.com'
+										});
+									}}
+								>
+									Update Rpc Data
+								</Button>
+
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									onClick={() => {
+										setMessage(prevMessage =>
+											prevMessage === 'Cloudflare'
+												? 'Edge Computing'
+												: 'Cloudflare'
+										);
+									}}
+								>
+									Toggle Message
+								</Button>
+							</div>
+
+							{/* Code Example */}
+							<div className='mt-6'>
+								<div className='mb-2 flex items-center justify-between'>
+									<h3 className='text-sm font-medium text-gray-300'>
+										Implementation Example
+									</h3>
+									<Button
+										variant='ghost'
+										size='sm'
+										className='h-7 text-xs text-gray-400 hover:text-gray-200'
+									>
+										Copy Code
+									</Button>
+								</div>
+								<div className='rounded-lg border border-gray-800 bg-gray-950 p-4'>
+									<pre className='overflow-auto font-mono text-sm text-gray-300'>
+										{`// Frontend Code
+const { resource, rpc } = useRpc();
+const { data, loading, fetch } = resource('hello', {
+  message: '${message}'
+});
+
+// Worker RPC Implementation
+class Rpc {
+  async hello({ message }: { message: string }) {
+    return { message: \`Hello, \${message}!\` }
+  }
+}`}
+									</pre>
+								</div>
+								<p className='mt-3 text-sm text-gray-400'>
+									Type-safe RPC calls provide end-to-end type
+									safety between your React frontend and
+									Cloudflare Worker backend, with automatic
+									code generation.
 								</p>
 							</div>
 						</div>
