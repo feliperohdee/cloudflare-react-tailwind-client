@@ -81,10 +81,10 @@ const App = () => {
 									</Button>
 								</div>
 								<div className='rounded border border-gray-700 bg-black p-4'>
-									<code className='font-mono text-sm text-gray-300 overflow-hidden'>
+									<pre className='font-mono text-sm text-gray-300 overflow-hidden'>
 										git clone
 										https://github.com/feliperohdee/vite-starter.git
-									</code>
+									</pre>
 								</div>
 								<p className='mt-3 text-sm text-gray-400'>
 									Clone the repository to your local machine
