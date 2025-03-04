@@ -6,9 +6,9 @@ import {
 	CardTitle
 } from '@/app/components/ui/card';
 import { Github, Globe, Code2, BookOpen } from 'lucide-react';
-import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 
+import { toast } from '@/app/components/ui/sonner';
 import useRpc from '@/app/hooks/use-rpc';
 
 const App = () => {

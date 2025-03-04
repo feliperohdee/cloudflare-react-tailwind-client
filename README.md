@@ -28,7 +28,7 @@ A modern full-stack starter template for building web applications with Cloudfla
 - **TypeScript** - Type safety and developer experience
 - **React Hooks** - Custom hooks for RPC communication
 - **Lucide React** - Beautiful, consistent icons
-- **Sonner** - Toast notifications
+- **use-sonner** - Toast notifications
 
 ### Backend
 
