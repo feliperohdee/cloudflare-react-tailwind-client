@@ -21,7 +21,7 @@
 		"typed-rpc": "^6.1.1",
 		"use-http-error": "^1.0.5",
 		"use-request-utils": "^1.0.7",
-		"use-sonner": "^1.0.1"
+		"use-sonner": "^1.0.3"
 	},
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "^0.1.7",

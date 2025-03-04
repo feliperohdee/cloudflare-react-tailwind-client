@@ -1,15 +1,15 @@
+import { Github, Globe, Code2, BookOpen } from 'lucide-react';
+import { toast } from 'use-sonner';
+import { useEffect, useState } from 'react';
+
 import { Button } from '@/app/components/ui/button';
+import useRpc from '@/app/hooks/use-rpc';
 import {
 	Card,
 	CardContent,
 	CardHeader,
 	CardTitle
 } from '@/app/components/ui/card';
-import { Github, Globe, Code2, BookOpen } from 'lucide-react';
-import { useEffect, useState } from 'react';
-
-import { toast } from '@/app/components/ui/sonner';
-import useRpc from '@/app/hooks/use-rpc';
 
 const App = () => {
 	const [message, setMessage] = useState('Cloudflare');
@@ -81,7 +81,7 @@ const App = () => {
 									</Button>
 								</div>
 								<div className='rounded border border-gray-700 bg-black p-4'>
-									<pre className='font-mono text-sm text-gray-300 overflow-hidden'>
+									<pre className='overflow-hidden font-mono text-sm text-gray-300'>
 										git clone
 										https://github.com/feliperohdee/vite-starter.git
 									</pre>
