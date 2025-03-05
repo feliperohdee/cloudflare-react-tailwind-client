@@ -36,11 +36,7 @@ class Context {
 	run<R>(
 		args: Omit<ContextStore, 'responseHeaders'>,
 		fn: () => Promise<R>
-	): Promise<R>;
-	run<R>(
-		args: Omit<ContextStore, 'responseHeaders'>,
-		fn: () => R | Promise<R>
-	): R | Promise<R> {
+	): Promise<R> {
 		return this.storage.run(
 			{
 				...args,
