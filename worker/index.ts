@@ -36,16 +36,16 @@ const rpcHandler = async (req: Request) => {
 
 const handler = {
 	async fetch(
-		req: Request,
+		request: Request,
 		env: Env,
-		ctx: ExecutionContext
+		executionContext: ExecutionContext
 	): Promise<Response> {
-		return context.run({ ctx, env, req }, async () => {
+		return context.run({ env, executionContext, request }, async () => {
 			try {
-				const { pathname } = new URL(req.url);
+				const { pathname } = new URL(request.url);
 
 				if (pathname.startsWith('/rpc')) {
-					return rpcHandler(req);
+					return rpcHandler(request);
 				}
 
 				throw new HttpError(404);

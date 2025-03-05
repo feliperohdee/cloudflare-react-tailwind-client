@@ -15,19 +15,19 @@ class Rpc {
 	}
 
 	async hello({ message }: { message: string }) {
-		const { req } = context.store;
+		const { request } = context.store;
 
 		try {
-			const session = await this.auth.authenticate(req.headers);
+			const session = await this.auth.authenticate(request.headers);
 
 			return {
 				message: `Hello, ${message} (${session.payload.email})!`,
-				url: req.url
+				url: request.url
 			};
 		} catch {
 			return {
 				message: `Hello, ${message}!`,
-				url: req.url
+				url: request.url
 			};
 		}
 	}

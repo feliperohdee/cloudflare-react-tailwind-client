@@ -2,9 +2,9 @@ import { AsyncLocalStorage } from 'async_hooks';
 import headers from 'use-request-utils/headers';
 
 type ContextStore = {
-	ctx: ExecutionContext;
 	env: Env;
-	req: Request;
+	executionContext: ExecutionContext;
+	request: Request;
 	responseHeaders: Headers;
 };
 
