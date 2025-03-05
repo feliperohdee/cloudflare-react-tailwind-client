@@ -1,13 +1,15 @@
 import { AsyncLocalStorage } from 'async_hooks';
 import headers from 'use-request-utils/headers';
 
+type ContextStore = {
+	ctx: ExecutionContext;
+	env: Env;
+	req: Request;
+	responseHeaders: Headers;
+};
+
 class Context {
-	private storage = new AsyncLocalStorage<{
-		ctx: ExecutionContext;
-		env: Env;
-		req: Request;
-		responseHeaders: Headers;
-	}>();
+	private storage = new AsyncLocalStorage<ContextStore>();
 
 	get store() {
 		const store = this.storage.getStore();
@@ -17,16 +19,6 @@ class Context {
 		}
 
 		return store;
-	}
-
-	get() {
-		const store = this.store;
-
-		return {
-			ctx: store.ctx,
-			env: store.env,
-			req: store.req
-		};
 	}
 
 	getResponseHeaders() {
@@ -41,18 +33,12 @@ class Context {
 	}
 
 	run<R>(
-		args: {
-			ctx: ExecutionContext;
-			env: Env;
-			req: Request;
-		},
+		args: Omit<ContextStore, 'responseHeaders'>,
 		fn: () => Promise<R>
 	): Promise<R> {
 		return this.storage.run(
 			{
-				ctx: args.ctx,
-				env: args.env,
-				req: args.req,
+				...args,
 				responseHeaders: new Headers()
 			},
 			fn
