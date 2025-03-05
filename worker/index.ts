@@ -40,7 +40,7 @@ const handler = {
 		env: Env,
 		executionContext: ExecutionContext
 	): Promise<Response> {
-		return context.run({ env, executionContext, request }, async () => {
+		return context.run({ env, executionContext, request }, () => {
 			try {
 				const { pathname } = new URL(request.url);
 
