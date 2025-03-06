@@ -3,22 +3,22 @@
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
 		"checkJs": false,
+		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
 		"jsx": "react-jsx",
-		"lib": ["es2021"],
-		"module": "es2022",
+		"lib": ["ESNext", "DOM"],
+		"module": "ESNext",
 		"moduleResolution": "Bundler",
 		"noEmit": true,
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./*"]
 		},
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"strict": true,
-		"target": "es2021",
-		"types": ["@cloudflare/workers-types/2023-07-01"]
+		"target": "ESNext",
+		"types": ["node", "vite/client", "@cloudflare/workers-types/2023-07-01"]
 	},
-	"exclude": ["tests"],
-	"include": ["worker-configuration.d.ts", "src/**/*.ts", "types.d.ts"]
+	"exclude": ["api-tests"]
 }
