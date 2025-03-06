@@ -3,8 +3,24 @@
 	"name": "cloudflare-worker-starter",
 	"compatibility_date": "2025-02-04",
 	"compatibility_flags": ["nodejs_compat"],
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "DO",
+				"class_name": "DurableObject"
+			}
+		]
+	},
 	"main": "worker/index.ts",
-	"assets": {},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["DurableObject"]
+		}
+	],
+	"assets": {
+		"directory": "public"
+	},
 	"observability": {
 		"enabled": true
 	},

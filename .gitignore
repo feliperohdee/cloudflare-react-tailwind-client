@@ -2,3 +2,5 @@
 *.lock
 dist
 node_modules
+
+worker/compress*

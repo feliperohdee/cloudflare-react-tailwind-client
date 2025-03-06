@@ -2,6 +2,7 @@ import { handleRpc } from 'typed-rpc/server';
 import HttpError from 'use-http-error';
 
 import context from '@/worker/context';
+import DurableObject from '@/worker/durable-object';
 import Rpc from '@/worker/rpc';
 
 const rpcHandler = async (req: Request) => {
@@ -44,7 +45,7 @@ const handler = {
 			try {
 				const { pathname } = new URL(request.url);
 
-				if (pathname.startsWith('/rpc')) {
+				if (request.method === 'POST' && pathname.startsWith('/rpc')) {
 					return rpcHandler(request);
 				}
 
@@ -58,4 +59,5 @@ const handler = {
 	}
 };
 
+export { DurableObject };
 export default handler;
