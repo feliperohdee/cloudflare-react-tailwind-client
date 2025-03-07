@@ -19,7 +19,9 @@
 		}
 	],
 	"assets": {
-		"directory": "public"
+		"binding": "ASSETS",
+		"directory": "public",
+		"not_found_handling": "single-page-application"
 	},
 	"observability": {
 		"enabled": true

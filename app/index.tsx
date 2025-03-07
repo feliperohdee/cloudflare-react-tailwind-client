@@ -1,8 +1,10 @@
 import { Github, Globe, Code2, BookOpen } from 'lucide-react';
+import { Routes, Route, Redirect, useRouter } from 'use-lite-react-router';
 import { toast } from 'use-sonner';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
+import { cn } from '@/app/lib/utils';
 import useRpc from '@/app/hooks/use-rpc';
 import {
 	Card,
@@ -11,53 +13,75 @@ import {
 	CardTitle
 } from '@/app/components/ui/card';
 
-const App = () => {
-	const [message, setMessage] = useState('Cloudflare');
-	const { resource, rpc } = useRpc();
-	const { data, error, fetch, index, loading, setData } = resource('hello', {
-		message
-	});
+const Hero = () => {
+	const { rawPath } = useRouter();
 
-	useEffect(() => {
-		if (loading) {
-			toast.loading('Connecting to worker...', {
-				id: `loading-${index}`
-			});
-		} else if (data) {
-			toast.success(`Received from worker: ${data.message}`, {
-				id: `loading-${index}`
-			});
-		} else if (error) {
-			toast.error(`Worker error: ${error.toString()}`, {
-				id: `loading-${index}`
-			});
-		}
-	}, [loading, data, error, index, rpc]);
+	return (
+		<>
+			<div className='mx-auto mb-12 max-w-3xl text-center'>
+				<h1 className='mb-4 text-4xl font-bold'>
+					Modern Web Development with
+					<div className='text-blue-500'>
+						{' '}
+						Cloudflare Workers + React
+					</div>
+				</h1>
 
+				<p className='mb-8 text-gray-400'>
+					Jumpstart your next project with this powerful tech stack
+					combining Cloudflare's edge computing, React's UI
+					capabilities, and Tailwind's utility-first CSS—all powered
+					by Vite and type-safe RPC.
+				</p>
+			</div>
+
+			<nav className='mb-6 flex'>
+				<Button
+					asChild
+					className={cn(
+						'rounded-l-md rounded-r-none border-r border-blue-800 bg-blue-600 px-6 hover:bg-blue-700',
+						rawPath === '/' && 'bg-blue-700'
+					)}
+				>
+					<a href='/'>Home</a>
+				</Button>
+
+				<Button
+					asChild
+					className={cn(
+						'rounded-l-none rounded-r-md bg-blue-600 px-6 hover:bg-blue-700',
+						rawPath === '/rpc' && 'bg-blue-700'
+					)}
+				>
+					<a href='/rpc'>RPC</a>
+				</Button>
+			</nav>
+		</>
+	);
+};
+
+const Footer = () => {
+	return (
+		<div className='mt-12 text-center'>
+			<a
+				href='https://github.com/feliperohdee/vite-starter'
+				className='inline-flex items-center text-gray-400 hover:text-gray-200'
+			>
+				<Github className='mr-2 h-4 w-4' />
+				View on GitHub
+			</a>
+		</div>
+	);
+};
+
+const Home = () => {
 	return (
 		<div className='min-h-screen bg-black text-gray-200'>
 			<div className='container mx-auto px-4 py-16'>
-				{/* Simple Hero Section */}
-				<div className='mx-auto mb-12 max-w-3xl text-center'>
-					<h1 className='mb-4 text-4xl font-bold'>
-						Modern Web Development with
-						<div className='text-blue-500'>
-							{' '}
-							Cloudflare Workers + React
-						</div>
-					</h1>
+				<Hero />
 
-					<p className='mb-8 text-gray-400'>
-						Jumpstart your next project with this powerful tech
-						stack combining Cloudflare's edge computing, React's UI
-						capabilities, and Tailwind's utility-first CSS—all
-						powered by Vite and type-safe RPC.
-					</p>
-				</div>
-
-				{/* Installation Card */}
 				<Card className='mx-auto max-w-3xl border-gray-800 bg-gray-900'>
-					<CardHeader className='border-b border-gray-800'>
+					<CardHeader>
 						<CardTitle className='flex items-center text-xl text-white'>
 							<Github className='mr-2 h-5 w-5 text-blue-500' />
 							Installation Guide
@@ -323,9 +347,42 @@ const App = () => {
 					</CardContent>
 				</Card>
 
-				{/* RPC Communication Demo */}
-				<Card className='mx-auto mt-12 max-w-3xl border-gray-800 bg-gray-900'>
-					<CardHeader className='border-b border-gray-800'>
+				<Footer />
+			</div>
+		</div>
+	);
+};
+
+const Rpc = () => {
+	const [message, setMessage] = useState('Cloudflare');
+	const { resource, rpc } = useRpc();
+	const { data, error, fetch, index, loading, setData } = resource('hello', {
+		message
+	});
+
+	useEffect(() => {
+		if (loading) {
+			toast.loading('Connecting to worker...', {
+				id: `loading-${index}`
+			});
+		} else if (data) {
+			toast.success(`Received from worker: ${data.message}`, {
+				id: `loading-${index}`
+			});
+		} else if (error) {
+			toast.error(`Worker error: ${error.toString()}`, {
+				id: `loading-${index}`
+			});
+		}
+	}, [loading, data, error, index, rpc]);
+
+	return (
+		<div className='min-h-screen bg-black text-gray-200'>
+			<div className='container mx-auto px-4 py-16'>
+				<Hero />
+
+				<Card className='mx-auto max-w-3xl border-gray-800 bg-gray-900'>
+					<CardHeader>
 						<CardTitle className='flex items-center text-xl text-white'>
 							<Code2 className='mr-2 h-5 w-5 text-blue-500' />
 							Type-Safe RPC Communication Demo
@@ -505,18 +562,30 @@ class Rpc {
 					</CardContent>
 				</Card>
 
-				{/* Footer */}
-				<div className='mt-12 text-center'>
-					<a
-						href='https://github.com/feliperohdee/vite-starter'
-						className='inline-flex items-center text-gray-400 hover:text-gray-200'
-					>
-						<Github className='mr-2 h-4 w-4' />
-						View on GitHub
-					</a>
-				</div>
+				<Footer />
 			</div>
 		</div>
+	);
+};
+
+const App = () => {
+	return (
+		<>
+			<Routes>
+				<Route
+					path='/'
+					component={Home}
+				/>
+				<Route
+					path='/rpc'
+					component={Rpc}
+				/>
+				<Redirect
+					path='*'
+					to='/'
+				/>
+			</Routes>
+		</>
 	);
 };
 

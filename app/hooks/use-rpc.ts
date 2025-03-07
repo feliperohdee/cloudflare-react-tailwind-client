@@ -227,14 +227,14 @@ const useRpc = (options?: RpcClientOptions) => {
 				transport: transport({
 					credentials: options.credentials,
 					getHeaders: options.getHeaders,
-					url: options.url || '/rpc'
+					url: options.url || '/api/rpc'
 				}),
 				uuid: options?.uuid
 			});
 		}
 
 		return rpcClient<Rpc>({
-			transport: transport({ url: '/rpc' })
+			transport: transport({ url: '/api/rpc' })
 		});
 	}, [options]);
 

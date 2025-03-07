@@ -10,7 +10,7 @@ import worker from '@/worker';
 
 describe('/worker', () => {
 	it('responds with Hello World! (unit style)', async () => {
-		const request = new Request('http://example.com/rpc', {
+		const request = new Request('http://example.com/api/rpc', {
 			method: 'POST',
 			body: JSON.stringify({
 				id: 1,
@@ -33,13 +33,13 @@ describe('/worker', () => {
 			id: 1,
 			result: {
 				message: 'Hello, World!',
-				url: 'http://example.com/rpc'
+				url: 'http://example.com/api/rpc'
 			}
 		});
 	});
 
 	it('responds with Hello World! (integration style)', async () => {
-		const response = await SELF.fetch('https://example.com/rpc', {
+		const response = await SELF.fetch('https://example.com/api/rpc', {
 			method: 'POST',
 			body: JSON.stringify({
 				id: 1,
@@ -58,7 +58,7 @@ describe('/worker', () => {
 			id: 1,
 			result: {
 				message: 'Hello, World!',
-				url: 'https://example.com/rpc'
+				url: 'https://example.com/api/rpc'
 			}
 		});
 	});

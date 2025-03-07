@@ -45,11 +45,11 @@ const handler = {
 			try {
 				const { pathname } = new URL(request.url);
 
-				if (request.method === 'POST' && pathname.startsWith('/rpc')) {
+				if (request.method === 'POST' && pathname === '/api/rpc') {
 					return rpcHandler(request);
 				}
 
-				throw new HttpError(404);
+				return env.ASSETS.fetch(request);
 			} catch (err) {
 				const httpError = HttpError.wrap(err as Error);
 
