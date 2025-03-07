@@ -35,7 +35,7 @@ const Hero = () => {
 				</p>
 			</div>
 
-			<nav className='mb-6 flex'>
+			<nav className='mx-auto mb-6 flex max-w-3xl'>
 				<Button
 					asChild
 					className={cn(
