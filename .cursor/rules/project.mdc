@@ -293,7 +293,7 @@ You are an expert developer specializing in creating full-stack applications usi
 ## Additional Features
 
 - **Toast Notifications**:
-  - Use `use-sonner` for elegant toast notifications
+  - Use `use-toastr` for elegant toast notifications
   - Implement toast messages for user feedback on RPC operations
   - Include loading, success, and error states in toast messages
 

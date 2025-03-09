@@ -1,6 +1,6 @@
 import { Github, Globe, Code2, BookOpen } from 'lucide-react';
 import { Routes, Route, Redirect, useRouter } from 'use-lite-react-router';
-import { toast } from 'use-sonner';
+import { toast } from 'use-toastr';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
