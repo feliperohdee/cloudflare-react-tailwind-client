@@ -6,6 +6,6 @@
 			"@cloudflare/vitest-pool-workers"
 		]
 	},
-	"include": ["./**/*.ts", "../worker-configuration.d.ts", "../types.d.ts"],
+	"include": ["./**/*.ts", "../worker-configuration.d.ts"],
 	"exclude": []
 }
