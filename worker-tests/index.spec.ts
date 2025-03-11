@@ -9,7 +9,7 @@ import {
 import worker from '@/worker';
 
 describe('/worker', () => {
-	it('responds with Hello World! (unit style)', async () => {
+	it('should respond to rpc requests (unit style)', async () => {
 		const request = new Request('http://example.com/api/rpc', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -38,7 +38,7 @@ describe('/worker', () => {
 		});
 	});
 
-	it('responds with Hello World! (integration style)', async () => {
+	it('should respond to rpc requests (integration style)', async () => {
 		const response = await SELF.fetch('https://example.com/api/rpc', {
 			method: 'POST',
 			body: JSON.stringify({
