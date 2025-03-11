@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import {
 	createExecutionContext,
 	env,
@@ -5,7 +6,6 @@ import {
 	waitOnExecutionContext
 } from 'cloudflare:test';
 
-import { describe, it, expect } from 'vitest';
 import worker from '@/worker';
 
 describe('/worker', () => {
