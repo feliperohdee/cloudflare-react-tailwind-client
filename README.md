@@ -168,4 +168,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT © [Felipe Rohde](mailto:feliperohdee@gmail.com)
+
+## Author
+
+**Felipe Rohde**
+
+- Twitter: [@felipe_rohde](https://twitter.com/felipe_rohde)
+- Github: [@feliperohdee](https://github.com/feliperohdee)
+- Email: feliperohdee@gmail.com
