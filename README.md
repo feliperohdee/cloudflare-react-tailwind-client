@@ -49,7 +49,7 @@ A modern full-stack starter template for building web applications with Cloudfla
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/feliperohdee/vite-starter.git my-project
+git clone https://github.com/feliperohdee/cloudflare-react-tailwind-client.git my-project
 cd my-project
 ```
 
@@ -160,7 +160,7 @@ yarn deploy
 
 - [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers/)
 - [shadcn/ui Components](https://ui.shadcn.com/)
-- [Full Project Documentation](https://github.com/feliperohdee/vite-starter/blob/main/README.md)
+- [Full Project Documentation](https://github.com/feliperohdee/cloudflare-react-tailwind-client/blob/main/README.md)
 
 ## Contributing
 

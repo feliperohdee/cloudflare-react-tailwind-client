@@ -64,7 +64,7 @@ const Footer = () => {
 	return (
 		<div className='mt-12 text-center'>
 			<a
-				href='https://github.com/feliperohdee/vite-starter'
+				href='https://github.com/feliperohdee/cloudflare-react-tailwind-client'
 				className='inline-flex items-center text-gray-400 hover:text-gray-200'
 			>
 				<Github className='mr-2 h-4 w-4' />
@@ -107,7 +107,7 @@ const Home = () => {
 								<div className='rounded border border-gray-700 bg-black p-4'>
 									<pre className='overflow-hidden font-mono text-sm text-gray-300'>
 										git clone
-										https://github.com/feliperohdee/vite-starter.git
+										https://github.com/feliperohdee/cloudflare-react-tailwind-client.git
 									</pre>
 								</div>
 								<p className='mt-3 text-sm text-gray-400'>
@@ -317,7 +317,7 @@ const Home = () => {
 									className='flex-1 bg-blue-600 hover:bg-blue-700'
 									asChild
 								>
-									<a href='https://github.com/feliperohdee/vite-starter/blob/main/README.md'>
+									<a href='https://github.com/feliperohdee/cloudflare-react-tailwind-client/blob/main/README.md'>
 										<BookOpen className='mr-2 h-4 w-4' />
 										Documentation
 									</a>
