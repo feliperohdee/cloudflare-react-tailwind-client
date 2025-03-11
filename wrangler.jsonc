@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "cloudflare-worker-starter",
+	"name": "cloudflare-react-tailwind-worker-client",
 	"compatibility_date": "2025-02-04",
 	"compatibility_flags": ["nodejs_compat"],
 	"durable_objects": {
@@ -15,7 +15,7 @@
 	"migrations": [
 		{
 			"tag": "v1",
-			"new_sqlite_classes": ["DurableObject"]
+			"new_classes": ["DurableObject"]
 		}
 	],
 	"assets": {

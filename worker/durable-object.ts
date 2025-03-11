@@ -10,11 +10,7 @@ class Do extends DurableObject<Env> {
 	}
 
 	async sayHello() {
-		let res = this.ctx.storage.sql
-			.exec(`SELECT 'Hello, World!' as greeting`)
-			.one();
-
-		return { greeting: res.greeting };
+		return { greeting: 'Hello, World!' };
 	}
 }
 
