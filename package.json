@@ -10,6 +10,7 @@
 		"deploy": "vite build && wrangler deploy",
 		"dev": "vite dev",
 		"lint": "prettier --write . && eslint .",
+		"logs": "wrangler tail",
 		"test": "vitest"
 	},
 	"dependencies": {
