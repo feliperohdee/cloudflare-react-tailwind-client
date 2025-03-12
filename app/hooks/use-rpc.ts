@@ -26,6 +26,7 @@ type FetchOptions = {
 type RpcClientOptions = (FetchOptions | { transport: RpcTransport }) & {
 	abortable?: boolean;
 	debounceTime?: number;
+	lazy?: boolean;
 	transcoder?: RpcTranscoder<any>;
 	uuid?: RpcUuid;
 };
@@ -78,11 +79,13 @@ const resourceFactory = ({
 	abort,
 	abortable,
 	debounceTime,
+	lazy,
 	rpc
 }: {
 	abort: (promise: Promise<any>) => void;
 	abortable: boolean;
 	debounceTime: number;
+	lazy: boolean;
 	rpc: RpcFunctions<Rpc>;
 }) => {
 	return <T extends keyof Rpc>(method: T, ...args: Parameters<Rpc[T]>) => {
@@ -195,7 +198,7 @@ const resourceFactory = ({
 		}, [args, debouncedCheckAndExecute]);
 
 		useEffect(() => {
-			if (!firstExecute.current) {
+			if (!firstExecute.current && !lazy) {
 				firstExecute.current = true;
 				fetch();
 			}
@@ -242,6 +245,7 @@ const useRpc = (options?: RpcClientOptions) => {
 			abort: rpc.$abort,
 			abortable: options?.abortable ?? true,
 			debounceTime: options?.debounceTime ?? 300,
+			lazy: options?.lazy ?? false,
 			rpc
 		}),
 		rpc
