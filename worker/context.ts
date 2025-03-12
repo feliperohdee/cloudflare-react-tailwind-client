@@ -6,6 +6,7 @@ type ContextStore = {
 	executionContext: ExecutionContext;
 	request: Request;
 	responseHeaders: Headers;
+	url: URL;
 };
 
 class Context {

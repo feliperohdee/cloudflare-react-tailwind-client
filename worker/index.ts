@@ -41,11 +41,11 @@ const handler = {
 		env: Env,
 		executionContext: ExecutionContext
 	): Promise<Response> {
-		return context.run({ env, executionContext, request }, () => {
-			try {
-				const { pathname } = new URL(request.url);
+		const url = new URL(request.url);
 
-				if (request.method === 'POST' && pathname === '/api/rpc') {
+		return context.run({ env, executionContext, request, url }, () => {
+			try {
+				if (request.method === 'POST' && url.pathname === '/api/rpc') {
 					return rpcHandler(request);
 				}
 
