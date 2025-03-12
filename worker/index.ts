@@ -10,9 +10,9 @@ const handler = {
 		env: Env,
 		executionContext: ExecutionContext
 	): Promise<Response> {
-		const url = new URL(request.url);
-
 		HttpError.setIncludeStack(env.PRODUCTION === 'false');
+		
+		const url = new URL(request.url);
 
 		return context.run(
 			{
