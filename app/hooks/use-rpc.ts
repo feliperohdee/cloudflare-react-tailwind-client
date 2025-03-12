@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import debounce from 'lodash/debounce';
 import HttpError from 'use-http-error';
 import isEqual from 'lodash/isEqual';
+import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
 import {
 	JsonRpcRequest,
 	rpcClient,
@@ -53,7 +55,7 @@ const transport = (options: FetchOptions): RpcTransport => {
 
 			const data = await res.json();
 
-			if (data && typeof data === 'object' && 'error' in data) {
+			if (data && isObject(data) && 'error' in data) {
 				throw new HttpError(
 					(data.error as { code: number }).code,
 					(data.error as { message: string }).message,
@@ -109,10 +111,7 @@ const resourceFactory = ({
 			setState(state => {
 				return {
 					...state,
-					data:
-						typeof update === 'function'
-							? update(state.data!)
-							: update
+					data: isFunction(update) ? update(state.data!) : update
 				};
 			});
 		}, []);
@@ -130,7 +129,7 @@ const resourceFactory = ({
 						};
 					});
 
-					if (typeof rpc[method] !== 'function') {
+					if (!isFunction(rpc[method])) {
 						throw new HttpError(404, 'Method not found');
 					}
 
