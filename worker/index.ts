@@ -43,19 +43,30 @@ const handler = {
 	): Promise<Response> {
 		const url = new URL(request.url);
 
-		return context.run({ env, executionContext, request, url }, () => {
-			try {
-				if (request.method === 'POST' && url.pathname === '/api/rpc') {
-					return rpcHandler(request);
+		return context.run(
+			{
+				env,
+				executionContext,
+				request,
+				url
+			},
+			() => {
+				try {
+					if (
+						request.method === 'POST' &&
+						url.pathname === '/api/rpc'
+					) {
+						return rpcHandler(request);
+					}
+
+					return env.ASSETS.fetch(request);
+				} catch (err) {
+					const httpError = HttpError.wrap(err as Error);
+
+					return httpError.toResponse();
 				}
-
-				return env.ASSETS.fetch(request);
-			} catch (err) {
-				const httpError = HttpError.wrap(err as Error);
-
-				return httpError.toResponse();
 			}
-		});
+		);
 	}
 };
 
