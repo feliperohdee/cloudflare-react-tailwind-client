@@ -12,7 +12,7 @@ import {
 	RpcUuid
 } from 'typed-rpc';
 
-import type Rpc from '@/worker/rpc';
+import type { Rpc } from '@/worker/rpc';
 
 type FetchOptions = {
 	credentials?: RequestCredentials;
