@@ -84,5 +84,5 @@ const handler = async (req: Request) => {
 	});
 };
 
-export { Rpc };
+export type { Rpc };
 export default handler;

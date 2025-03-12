@@ -26,7 +26,6 @@ type FetchOptions = {
 type RpcClientOptions = (FetchOptions | { transport: RpcTransport }) & {
 	abortable?: boolean;
 	debounceTime?: number;
-	lazy?: boolean;
 	transcoder?: RpcTranscoder<any>;
 	uuid?: RpcUuid;
 };
@@ -241,11 +240,18 @@ const useRpc = (options?: RpcClientOptions) => {
 	}, [options]);
 
 	return {
+		lazyResource: resourceFactory({
+			abort: rpc.$abort,
+			abortable: options?.abortable ?? true,
+			debounceTime: options?.debounceTime ?? 300,
+			lazy: true,
+			rpc
+		}),
 		resource: resourceFactory({
 			abort: rpc.$abort,
 			abortable: options?.abortable ?? true,
 			debounceTime: options?.debounceTime ?? 300,
-			lazy: options?.lazy ?? false,
+			lazy: false,
 			rpc
 		}),
 		rpc
