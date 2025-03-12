@@ -21,7 +21,7 @@
 		"typed-rpc": "^6.1.1",
 		"use-http-error": "^1.0.5",
 		"use-lite-react-router": "^1.0.2",
-		"use-request-utils": "^1.0.7",
+		"use-request-utils": "^1.0.9",
 		"use-toastr": "^1.0.1"
 	},
 	"devDependencies": {

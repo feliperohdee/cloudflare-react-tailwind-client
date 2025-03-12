@@ -12,6 +12,8 @@ const handler = {
 	): Promise<Response> {
 		const url = new URL(request.url);
 
+		HttpError.setIncludeStack(env.PRODUCTION === 'false');
+
 		return context.run(
 			{
 				env,
