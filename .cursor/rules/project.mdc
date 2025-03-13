@@ -196,7 +196,7 @@ You are an expert developer specializing in creating full-stack applications usi
 
 - **Conditional Classes with `cn` Utility**:
   ```tsx
-  import { cn } from '@/app/lib/utils';
+  import { cn } from '@/app/libs/utils';
   
   // Using cn for conditional classes
   <Button

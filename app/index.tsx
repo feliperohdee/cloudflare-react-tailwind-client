@@ -4,7 +4,7 @@ import { toast } from 'use-toastr';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
-import { cn } from '@/app/lib/utils';
+import { cn } from '@/app/libs/utils';
 import useRpc from '@/app/hooks/use-rpc';
 import {
 	Card,

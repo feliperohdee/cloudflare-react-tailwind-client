@@ -4,6 +4,7 @@ import headers from 'use-request-utils/headers';
 type ContextStore = {
 	env: Env;
 	executionContext: ExecutionContext;
+	lang: string;
 	request: Request;
 	responseHeaders: Headers;
 	url: URL;
