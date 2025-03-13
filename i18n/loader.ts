@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import isNil from 'lodash/isNil';
+import isString from 'lodash/isString';
 
 let cache: Record<string, string> = {};
 let translations: Record<string, string> = {};
@@ -19,13 +20,13 @@ const load = (newTranslations: Record<string, string>) => {
 
 		let value = translations[key] || key;
 
-		if (args && _.isString(value)) {
+		if (args && isString(value)) {
 			value = value.replace(/\{\{\s?(\w+)\s?\}\}/g, (sub, param) => {
-				return `${!_.isNil(args[param]) ? args[param] : ''}`;
+				return `${!isNil(args[param]) ? args[param] : ''}`;
 			});
 
 			value = value.replace(/\{\s?(\w+)\s?\}/g, (sub, param) => {
-				return `${!_.isNil(args[param]) ? args[param] : ''}`;
+				return `${!isNil(args[param]) ? args[param] : ''}`;
 			});
 		}
 
