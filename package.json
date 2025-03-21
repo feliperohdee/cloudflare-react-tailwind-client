@@ -16,7 +16,6 @@
 	"dependencies": {
 		"@cloudflare/vite-plugin": "^0.1.11",
 		"@cloudflare/vitest-pool-workers": "^0.8.0",
-		"@cloudflare/workers-types": "^4.20250312.0",
 		"@eslint/js": "^9.21.0",
 		"@radix-ui/react-slot": "^1.1.2",
 		"@tailwindcss/vite": "^4.0.14",
@@ -48,6 +47,6 @@
 		"use-toastr": "^1.0.3",
 		"vite": "^6.2.0",
 		"vitest": "2.1.8",
-		"wrangler": "^4.0.0"
+		"wrangler": "^4.3.0"
 	}
 }

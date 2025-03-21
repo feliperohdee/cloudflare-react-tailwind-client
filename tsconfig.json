@@ -17,6 +17,6 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "ESNext",
-		"types": ["vite/client", "@cloudflare/workers-types/2023-07-01"]
+		"types": ["vite/client"]
 	}
 }
