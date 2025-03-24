@@ -14,11 +14,6 @@ const Hero = () => {
 							<span className='sr-only'>
 								Cloudflare Workers + React + Tailwind
 							</span>
-							<img
-								alt=''
-								src='/images/mark.svg'
-								className='h-8 w-auto'
-							/>
 						</a>
 					</div>
 					<div className='flex flex-1 justify-end'>
