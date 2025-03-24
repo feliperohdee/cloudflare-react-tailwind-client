@@ -96,13 +96,6 @@ const Home = () => {
 									<h3 className='text-sm font-medium text-gray-300'>
 										1. Clone Repository
 									</h3>
-									<Button
-										variant='ghost'
-										size='sm'
-										className='h-7 text-xs text-gray-400 hover:text-gray-200'
-									>
-										Copy
-									</Button>
 								</div>
 								<div className='rounded border border-gray-700 bg-black p-4'>
 									<pre className='overflow-hidden font-mono text-sm text-gray-300'>
@@ -122,13 +115,6 @@ const Home = () => {
 									<h3 className='text-sm font-medium text-gray-300'>
 										2. Install Dependencies
 									</h3>
-									<Button
-										variant='ghost'
-										size='sm'
-										className='h-7 text-xs text-gray-400 hover:text-gray-200'
-									>
-										Copy
-									</Button>
 								</div>
 								<div className='rounded border border-gray-700 bg-black p-4'>
 									<code className='font-mono text-sm text-gray-300'>
@@ -148,13 +134,6 @@ const Home = () => {
 									<h3 className='text-sm font-medium text-gray-300'>
 										3. Start Development Server
 									</h3>
-									<Button
-										variant='ghost'
-										size='sm'
-										className='h-7 text-xs text-gray-400 hover:text-gray-200'
-									>
-										Copy
-									</Button>
 								</div>
 								<div className='rounded border border-gray-700 bg-black p-4'>
 									<code className='font-mono text-sm text-gray-300'>
@@ -181,13 +160,6 @@ const Home = () => {
 											<p className='text-xs font-medium text-gray-400'>
 												Deploy to Cloudflare
 											</p>
-											<Button
-												variant='ghost'
-												size='sm'
-												className='h-6 text-xs text-gray-400 hover:text-gray-200'
-											>
-												Copy
-											</Button>
 										</div>
 										<div className='rounded border border-gray-700 bg-black p-3'>
 											<code className='font-mono text-sm text-gray-300'>
@@ -206,13 +178,6 @@ const Home = () => {
 											<p className='text-xs font-medium text-gray-400'>
 												Run Tests
 											</p>
-											<Button
-												variant='ghost'
-												size='sm'
-												className='h-6 text-xs text-gray-400 hover:text-gray-200'
-											>
-												Copy
-											</Button>
 										</div>
 										<div className='rounded border border-gray-700 bg-black p-3'>
 											<code className='font-mono text-sm text-gray-300'>
@@ -231,13 +196,6 @@ const Home = () => {
 											<p className='text-xs font-medium text-gray-400'>
 												Generate Worker Types
 											</p>
-											<Button
-												variant='ghost'
-												size='sm'
-												className='h-6 text-xs text-gray-400 hover:text-gray-200'
-											>
-												Copy
-											</Button>
 										</div>
 										<div className='rounded border border-gray-700 bg-black p-3'>
 											<code className='font-mono text-sm text-gray-300'>
@@ -256,13 +214,6 @@ const Home = () => {
 											<p className='text-xs font-medium text-gray-400'>
 												Lint Code
 											</p>
-											<Button
-												variant='ghost'
-												size='sm'
-												className='h-6 text-xs text-gray-400 hover:text-gray-200'
-											>
-												Copy
-											</Button>
 										</div>
 										<div className='rounded border border-gray-700 bg-black p-3'>
 											<code className='font-mono text-sm text-gray-300'>
@@ -281,13 +232,6 @@ const Home = () => {
 											<p className='text-xs font-medium text-gray-400'>
 												Add Component
 											</p>
-											<Button
-												variant='ghost'
-												size='sm'
-												className='h-6 text-xs text-gray-400 hover:text-gray-200'
-											>
-												Copy
-											</Button>
 										</div>
 										<div className='rounded border border-gray-700 bg-black p-3'>
 											<code className='font-mono text-sm text-gray-300'>
@@ -527,13 +471,6 @@ const Rpc = () => {
 									<h3 className='text-sm font-medium text-gray-300'>
 										Implementation Example
 									</h3>
-									<Button
-										variant='ghost'
-										size='sm'
-										className='h-7 text-xs text-gray-400 hover:text-gray-200'
-									>
-										Copy Code
-									</Button>
 								</div>
 								<div className='rounded-lg border border-gray-800 bg-gray-950 p-4'>
 									<pre className='overflow-auto font-mono text-sm text-gray-300'>
