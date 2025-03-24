@@ -1,10 +1,12 @@
 import { Github, Globe, Code2, BookOpen } from 'lucide-react';
-import { Routes, Route, Redirect, useRouter } from 'use-lite-react-router';
+import { Routes, Route, Redirect } from 'use-lite-react-router';
 import { toast } from 'use-toastr';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
-import { cn } from '@/app/libs/utils';
+import Footer from '@/app/components/footer';
+import Hero from '@/app/components/hero';
+import Nav from '@/app/components/nav';
 import useRpc from '@/app/hooks/use-rpc';
 import {
 	Card,
@@ -13,73 +15,13 @@ import {
 	CardTitle
 } from '@/app/components/ui/card';
 
-const Hero = () => {
-	const { rawPath } = useRouter();
-
-	return (
-		<>
-			<div className='mx-auto mb-12 max-w-3xl text-center'>
-				<h1 className='mb-4 text-4xl font-bold'>
-					Modern Web Development with
-					<div className='text-blue-500'>
-						{' '}
-						Cloudflare Workers + React
-					</div>
-				</h1>
-
-				<p className='mb-8 text-gray-400'>
-					Jumpstart your next project with this powerful tech stack
-					combining Cloudflare's edge computing, React's UI
-					capabilities, and Tailwind's utility-first CSS—all powered
-					by Vite and type-safe RPC.
-				</p>
-			</div>
-
-			<nav className='mx-auto mb-6 flex max-w-3xl'>
-				<Button
-					asChild
-					className={cn(
-						'rounded-l-md rounded-r-none border-r border-blue-800 bg-blue-600 px-6 hover:bg-blue-700',
-						rawPath === '/' && 'bg-blue-700'
-					)}
-				>
-					<a href='/'>Home</a>
-				</Button>
-
-				<Button
-					asChild
-					className={cn(
-						'rounded-l-none rounded-r-md bg-blue-600 px-6 hover:bg-blue-700',
-						rawPath === '/rpc' && 'bg-blue-700'
-					)}
-				>
-					<a href='/rpc'>RPC</a>
-				</Button>
-			</nav>
-		</>
-	);
-};
-
-const Footer = () => {
-	return (
-		<div className='mt-12 text-center'>
-			<a
-				href='https://github.com/feliperohdee/cloudflare-react-tailwind-client'
-				className='inline-flex items-center text-gray-400 hover:text-gray-200'
-			>
-				<Github className='mr-2 h-4 w-4' />
-				View on GitHub
-			</a>
-		</div>
-	);
-};
-
 const Home = () => {
 	return (
 		<div className='min-h-screen bg-black text-gray-200'>
-			<div className='container mx-auto px-4 py-16'>
-				<Hero />
+			<Hero />
 
+			<div className='container mx-auto px-4 py-8'>
+				<Nav />
 				<Card className='mx-auto max-w-3xl border-gray-800 bg-gray-900'>
 					<CardHeader>
 						<CardTitle className='flex items-center text-xl text-white'>
@@ -322,9 +264,10 @@ const Rpc = () => {
 
 	return (
 		<div className='min-h-screen bg-black text-gray-200'>
-			<div className='container mx-auto px-4 py-16'>
-				<Hero />
+			<Hero />
 
+			<div className='container mx-auto px-4 py-8'>
+				<Nav />
 				<Card className='mx-auto max-w-3xl border-gray-800 bg-gray-900'>
 					<CardHeader>
 						<CardTitle className='flex items-center text-xl text-white'>

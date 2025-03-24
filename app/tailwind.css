@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@plugin 'tailwindcss-animate';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -39,6 +39,7 @@
 	--background: oklch(1 0 0);
 	--foreground: oklch(0.141 0.005 285.823);
 }
+
 .dark {
 	--background: oklch(0.183 0.006 285.79);
 	--foreground: oklch(0.985 0 0);
