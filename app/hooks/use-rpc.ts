@@ -167,8 +167,6 @@ const resourceFactory = ({
 							loaded: false
 						};
 					});
-
-					return null;
 				}
 			},
 			[method, args]
