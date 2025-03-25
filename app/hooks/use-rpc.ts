@@ -150,6 +150,8 @@ const resourceFactory = ({
 							loaded: true
 						};
 					});
+
+					return data as Data;
 				} catch (err) {
 					const httpError = HttpError.wrap(err as Error);
 
@@ -165,6 +167,8 @@ const resourceFactory = ({
 							loaded: false
 						};
 					});
+
+					return null;
 				}
 			},
 			[method, args]
