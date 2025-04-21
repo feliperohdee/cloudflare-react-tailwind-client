@@ -1,12 +1,10 @@
 import { AsyncLocalStorage } from 'async_hooks';
-import headers from 'use-request-utils/headers';
 
 type ContextStore = {
 	env: Env;
 	executionContext: ExecutionContext;
 	lang: string;
 	request: Request;
-	responseHeaders: Headers;
 	url: URL;
 };
 
@@ -23,33 +21,9 @@ class Context {
 		return store;
 	}
 
-	getResponseHeaders() {
-		return this.store.responseHeaders;
-	}
-
-	mergeResponseHeaders(newHeaders: Headers) {
-		this.store.responseHeaders = headers.merge(
-			this.store.responseHeaders,
-			newHeaders
-		);
-	}
-
-	run<R>(args: Omit<ContextStore, 'responseHeaders'>, fn: () => R): R;
-	run<R>(
-		args: Omit<ContextStore, 'responseHeaders'>,
-		fn: () => Promise<R>
-	): Promise<R> {
-		return this.storage.run(
-			{
-				...args,
-				responseHeaders: new Headers()
-			},
-			fn
-		);
-	}
-
-	setResponseHeaders(newHeaders: Headers) {
-		this.store.responseHeaders = newHeaders;
+	run<R>(args: ContextStore, fn: () => R): R;
+	run<R>(args: ContextStore, fn: () => Promise<R>): Promise<R> {
+		return this.storage.run(args, fn);
 	}
 }
 

@@ -1,12 +1,14 @@
 import { Code2 } from 'lucide-react';
 import { toast } from 'use-toastr';
 import { useEffect, useState } from 'react';
+import useRpc from 'use-request-utils/use-rpc';
+import useFetchRpc from 'use-request-utils/use-fetch-rpc';
 
 import { Button } from '@/app/components/ui/button';
 import Footer from '@/app/components/footer';
 import Hero from '@/app/components/hero';
 import Nav from '@/app/components/nav';
-import useRpc from '@/app/hooks/use-rpc';
+import type RootRpc from '@/worker/rpc';
 import {
 	Card,
 	CardContent,
@@ -16,26 +18,41 @@ import {
 
 const RpcPage = () => {
 	const [message, setMessage] = useState('Cloudflare');
-	const { resource, rpc } = useRpc();
-	const { data, error, fetch, index, loading, setData } = resource('hello', {
-		message
-	});
+	const { fetchRpc } = useFetchRpc<RootRpc>();
+	const rpc = useRpc<RootRpc>();
+	const {
+		data,
+		error,
+		fetch,
+		fetchTimes,
+		lastFetchDuration,
+		loadedTimes,
+		loading,
+		setData
+	} = fetchRpc(
+		rpc => {
+			return rpc.hello({ message });
+		},
+		{
+			deps: [message]
+		}
+	);
 
 	useEffect(() => {
 		if (loading) {
 			toast.loading('Connecting to worker...', {
-				id: `loading-${index}`
+				id: `loading-${fetchTimes}`
 			});
 		} else if (data) {
 			toast.success(`Received from worker: ${data.message}`, {
-				id: `loading-${index}`
+				id: `loading-${fetchTimes}`
 			});
 		} else if (error) {
 			toast.error(`Worker error: ${error.toString()}`, {
-				id: `loading-${index}`
+				id: `loading-${fetchTimes}`
 			});
 		}
-	}, [loading, data, error, index, rpc]);
+	}, [loading, data, error, fetchTimes]);
 
 	return (
 		<div className='min-h-screen bg-black text-gray-200'>
@@ -86,6 +103,11 @@ const RpcPage = () => {
 										{loading
 											? 'Connecting to worker...'
 											: 'Connected'}
+										{lastFetchDuration > 0 && (
+											<span className='ml-2 text-xs text-gray-500'>
+												{lastFetchDuration.toFixed(2)}ms
+											</span>
+										)}
 									</p>
 								</div>
 								<div className='border-t border-gray-800 pt-3'>
@@ -157,7 +179,7 @@ const RpcPage = () => {
 
 										toast.info(`Signed in: ${res.email}`, {
 											closeButton: true,
-											id: `signin-${index}`
+											id: `signin-${loadedTimes}`
 										});
 
 										setTimeout(fetch);
@@ -173,7 +195,7 @@ const RpcPage = () => {
 
 										toast.info('Signed out', {
 											closeButton: true,
-											id: `signout-${index}`
+											id: `signout-${loadedTimes}`
 										});
 
 										setTimeout(fetch);
