@@ -26,7 +26,6 @@ const RpcPage = () => {
 		fetch,
 		fetchTimes,
 		lastFetchDuration,
-		loadedTimes,
 		loading,
 		setData
 	} = fetchRpc(
@@ -179,7 +178,7 @@ const RpcPage = () => {
 
 										toast.info(`Signed in: ${res.email}`, {
 											closeButton: true,
-											id: `signin-${loadedTimes}`
+											id: `signin-${fetchTimes}`
 										});
 
 										setTimeout(fetch);
@@ -195,7 +194,7 @@ const RpcPage = () => {
 
 										toast.info('Signed out', {
 											closeButton: true,
-											id: `signout-${loadedTimes}`
+											id: `signout-${fetchTimes}`
 										});
 
 										setTimeout(fetch);
