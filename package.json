@@ -46,6 +46,6 @@
 		"use-toastr": "^1.0.3",
 		"vite": "^6.2.0",
 		"vitest": "2.1.8",
-		"wrangler": "^4.9.0"
+		"wrangler": "^4.12.0"
 	}
 }
