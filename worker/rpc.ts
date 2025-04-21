@@ -1,6 +1,6 @@
 import AuthJwt from 'use-request-utils/auth-jwt';
-import Rpc from 'use-request-utils/rpc';
 import context from '@/worker/context';
+import Rpc from 'use-request-utils/rpc';
 
 class Root extends Rpc {
 	private auth: AuthJwt;
