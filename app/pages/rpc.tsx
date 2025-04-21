@@ -1,8 +1,8 @@
 import { Code2 } from 'lucide-react';
 import { toast } from 'use-toastr';
 import { useEffect, useState } from 'react';
-import useRpc from 'use-request-utils/use-rpc';
 import useFetchRpc from 'use-request-utils/use-fetch-rpc';
+import useRpc from 'use-request-utils/use-rpc';
 
 import { Button } from '@/app/components/ui/button';
 import Footer from '@/app/components/footer';
