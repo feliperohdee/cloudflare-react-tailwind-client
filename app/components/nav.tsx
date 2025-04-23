@@ -21,11 +21,21 @@ const Nav = () => {
 			<Button
 				asChild
 				className={cn(
-					'rounded-l-none rounded-r-md bg-blue-600 px-6 hover:bg-blue-700',
+					'rounded-none border-r border-blue-800 bg-blue-600 px-6 hover:bg-blue-700',
 					rawPath === '/rpc' && 'bg-blue-700'
 				)}
 			>
 				<a href='/rpc'>RPC</a>
+			</Button>
+
+			<Button
+				asChild
+				className={cn(
+					'rounded-l-none rounded-r-md bg-blue-600 px-6 hover:bg-blue-700',
+					rawPath === '/protected' && 'bg-blue-700'
+				)}
+			>
+				<a href='/protected'>Protected</a>
 			</Button>
 		</nav>
 	);

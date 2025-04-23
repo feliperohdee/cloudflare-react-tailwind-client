@@ -33,6 +33,24 @@ class Root extends Rpc {
 		}
 	}
 
+	async isAuthenticated() {
+		const { request } = context.store;
+
+		try {
+			const session = await this.auth.authenticate(request.headers);
+
+			return {
+				authenticated: true,
+				user: session.payload
+			};
+		} catch {
+			return {
+				authenticated: false,
+				user: null
+			};
+		}
+	}
+
 	async signin({ email, password }: { email: string; password: string }) {
 		const res = await this.auth.sign({ email, password });
 
