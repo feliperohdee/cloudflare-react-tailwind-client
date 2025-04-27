@@ -64,9 +64,7 @@ const handler = {
 			{
 				env,
 				executionContext,
-				lang,
-				request,
-				url
+				lang
 			},
 			() => {
 				try {

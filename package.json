@@ -14,8 +14,8 @@
 		"test": "vitest"
 	},
 	"dependencies": {
-		"@cloudflare/vite-plugin": "^1.0.2",
-		"@cloudflare/vitest-pool-workers": "^0.8.13",
+		"@cloudflare/vite-plugin": "^1.0.12",
+		"@cloudflare/vitest-pool-workers": "^0.8.22",
 		"@eslint/js": "^9.21.0",
 		"@radix-ui/react-slot": "^1.1.2",
 		"@tailwindcss/vite": "^4.0.14",
@@ -42,10 +42,10 @@
 		"typescript-eslint": "^8.26.1",
 		"use-http-error": "^1.0.5",
 		"use-lite-react-router": "^1.0.2",
-		"use-request-utils": "^1.0.33",
+		"use-request-utils": "^1.0.37",
 		"use-toastr": "^1.0.3",
 		"vite": "^6.2.0",
 		"vitest": "2.1.8",
-		"wrangler": "^4.12.0"
+		"wrangler": "^4.13.2"
 	}
 }
