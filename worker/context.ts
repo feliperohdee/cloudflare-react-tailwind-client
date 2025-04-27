@@ -4,8 +4,6 @@ type ContextStore = {
 	env: Env;
 	executionContext: ExecutionContext;
 	lang: string;
-	request: Request;
-	url: URL;
 };
 
 class Context {

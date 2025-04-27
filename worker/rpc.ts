@@ -1,5 +1,4 @@
 import AuthJwt from 'use-request-utils/auth-jwt';
-import context from '@/worker/context';
 import Rpc from 'use-request-utils/rpc';
 
 class Root extends Rpc {
@@ -16,19 +15,19 @@ class Root extends Rpc {
 	}
 
 	async hello({ message }: { message: string }) {
-		const { request } = context.store;
+		const { headers, url } = this.context;
 
 		try {
-			const session = await this.auth.authenticate(request.headers);
+			const session = await this.auth.authenticate(headers);
 
 			return {
 				message: `Hello, ${message} (${session.payload.email})!`,
-				url: request.url
+				url: url.toString()
 			};
 		} catch {
 			return {
 				message: `Hello, ${message}!`,
-				url: request.url
+				url: url.toString()
 			};
 		}
 	}
