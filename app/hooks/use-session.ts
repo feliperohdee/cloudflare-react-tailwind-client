@@ -6,15 +6,17 @@ import useFetchRpc from 'use-request-utils/use-fetch-rpc';
 import type RootRpc from '@/worker/rpc';
 
 const useProtected = ({
+	message = 'You need to be authenticated to access this page',
+	redirectIfLoggedTo = '/',
 	redirectTo = '/',
-	message = 'You need to be authenticated to access this page'
 }: {
+	redirectIfLoggedTo?: string;
 	redirectTo?: string;
 	message?: string;
 } = {}) => {
 	const handled = useRef(false);
 	const { fetchRpc } = useFetchRpc<RootRpc>();
-	const { navigate } = useRouter();
+	const { navigate, path } = useRouter();
 	const session = fetchRpc(rpc => {
 		return rpc.isAuthenticated();
 	});
@@ -29,6 +31,8 @@ const useProtected = ({
 		if (!session.data.authenticated) {
 			toast.error(message);
 			navigate(redirectTo);
+		} else if (redirectIfLoggedTo && path !== redirectIfLoggedTo) {
+			navigate(redirectIfLoggedTo);
 		}
 	}, [message, navigate, redirectTo, session.data]);
 

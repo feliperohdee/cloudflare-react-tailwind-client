@@ -1,4 +1,4 @@
-import useProtected from '@/app/hooks/use-protected';
+import useSession from '@/app/hooks/use-session';
 
 import Nav from '@/app/components/nav';
 import Footer from '@/app/components/footer';
@@ -7,7 +7,7 @@ import Hero from '@/app/components/hero';
 const ProtectedPage = () => {
 	// This will automatically check if user is authenticated
 	// If not, it will redirect to home page with an error message
-	const { authenticated, user } = useProtected({
+	const { authenticated, user } = useSession({
 		redirectTo: '/',
 		message: 'Please sign in to access the protected page'
 	});
