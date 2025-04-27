@@ -8,7 +8,7 @@ import type RootRpc from '@/worker/rpc';
 const useProtected = ({
 	message = 'You need to be authenticated to access this page',
 	redirectIfLoggedTo = '/',
-	redirectTo = '/',
+	redirectTo = '/'
 }: {
 	redirectIfLoggedTo?: string;
 	redirectTo?: string;
@@ -34,7 +34,7 @@ const useProtected = ({
 		} else if (redirectIfLoggedTo && path !== redirectIfLoggedTo) {
 			navigate(redirectIfLoggedTo);
 		}
-	}, [message, navigate, redirectTo, session.data]);
+	}, [message, navigate, redirectTo, path, redirectIfLoggedTo, session.data]);
 
 	return (
 		session.data || {
