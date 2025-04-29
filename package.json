@@ -43,7 +43,7 @@
 		"use-http-error": "^1.0.5",
 		"use-lite-react-router": "^1.0.2",
 		"use-request-utils": "^1.0.39",
-		"use-toastr": "^1.0.3",
+		"use-toastr": "^1.0.4",
 		"vite": "^6.2.0",
 		"vitest": "2.1.8",
 		"wrangler": "^4.13.2"
