@@ -2,7 +2,6 @@ import cookies from 'use-request-utils/cookies';
 import HttpError from 'use-http-error';
 import i18n from '@/i18n';
 import isPlainObject from 'lodash/isPlainObject';
-import Request from 'use-request-utils/request';
 import Rpc from 'use-request-utils/rpc';
 import util from 'use-request-utils/util';
 
