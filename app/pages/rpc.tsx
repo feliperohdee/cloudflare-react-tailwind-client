@@ -29,11 +29,11 @@ const RpcPage = () => {
 		loading,
 		setData
 	} = fetchRpc(
-		rpc => {
-			return rpc.hello({ message });
+		(rpc, input?: { message: string }) => {
+			return rpc.hello(input ?? { message });
 		},
 		{
-			deps: [message]
+			triggerDeps: [message]
 		}
 	);
 
