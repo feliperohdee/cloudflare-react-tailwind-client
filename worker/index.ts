@@ -3,7 +3,6 @@ import HttpError from 'use-http-error';
 import i18n from '@/i18n';
 import isPlainObject from 'lodash/isPlainObject';
 import Rpc from 'use-request-utils/rpc';
-import util from 'use-request-utils/util';
 
 import context from '@/worker/context';
 import DurableObject from '@/worker/durable-object';
@@ -21,7 +20,7 @@ const fetchRpc = async (rpc: Rpc, req: Request): Promise<Response> => {
 		const form = await req.formData();
 		const formBody = form.get('body');
 		const formRpc = form.get('rpc') as string;
-		const rpcRequest: Rpc.Request = util.safeParse(formRpc);
+		const rpcRequest=  Rpc.parseString(formRpc);
 
 		if (!isPlainObject(rpcRequest)) {
 			throw new HttpError(400);
