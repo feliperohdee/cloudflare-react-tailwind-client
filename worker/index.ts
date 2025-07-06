@@ -20,7 +20,7 @@ const fetchRpc = async (rpc: Rpc, req: Request): Promise<Response> => {
 		const form = await req.formData();
 		const formBody = form.get('body');
 		const formRpc = form.get('rpc') as string;
-		const rpcRequest=  Rpc.parseString(formRpc);
+		const rpcRequest = Rpc.parseString(formRpc);
 
 		if (!isPlainObject(rpcRequest)) {
 			throw new HttpError(400);
