@@ -17,6 +17,6 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "ESNext",
-		"types": ["vite/client"]
+		"types": ["vite/client", "@cloudflare/vitest-pool-workers"]
 	}
 }
