@@ -11,7 +11,7 @@ A modern full-stack starter template for building web applications with Cloudfla
 ## Features
 
 - 🚀 **Full-Stack Development**: Seamless integration between frontend and backend
-- ⚡ **Vite + React**: Lightning-fast HMR with React 18 and TypeScript
+- ⚡ **Vite + React**: Lightning-fast HMR with React 19 and TypeScript
 - 💅 **Tailwind CSS + shadcn/ui**: Beautiful, customizable UI components
 - 🔄 **Type-Safe RPC**: End-to-end type safety with automatic code generation
 - 🌐 **Edge Computing**: Deploy globally with Cloudflare Workers
@@ -21,7 +21,7 @@ A modern full-stack starter template for building web applications with Cloudfla
 
 ### Frontend
 
-- **React 18** - UI library
+- **React 19** - UI library
 - **Vite** - Fast development environment
 - **Tailwind CSS** - Utility-first CSS framework
 - **shadcn/ui** - Accessible UI components built with Radix UI and Tailwind
