@@ -1,8 +1,6 @@
 import { AsyncLocalStorage } from 'async_hooks';
 
 type ContextStore = {
-	env: Env;
-	executionContext: ExecutionContext;
 	lang: string;
 };
 

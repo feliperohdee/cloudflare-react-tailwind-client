@@ -41,11 +41,7 @@ const fetchRpc = async (rpc: Rpc, req: Request): Promise<Response> => {
 };
 
 const handler = {
-	async fetch(
-		request: Request,
-		env: Env,
-		executionContext: ExecutionContext
-	): Promise<Response> {
+	async fetch(request: Request, env: Env): Promise<Response> {
 		HttpError.setIncludeStack(env.PRODUCTION === 'false');
 
 		const url = new URL(request.url);
@@ -61,8 +57,6 @@ const handler = {
 
 		const res = await context.run(
 			{
-				env,
-				executionContext,
 				lang
 			},
 			() => {
