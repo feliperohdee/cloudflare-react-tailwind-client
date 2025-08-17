@@ -27,7 +27,7 @@ describe('/worker', () => {
 		});
 
 		const ctx = createExecutionContext();
-		const response = await worker.fetch(request, env, ctx);
+		const response = await worker.fetch(request, env);
 
 		await waitOnExecutionContext(ctx);
 		expect(await response.json()).toEqual({

@@ -5,7 +5,6 @@ import isPlainObject from 'lodash/isPlainObject';
 import Rpc from 'use-request-utils/rpc';
 
 import context from '@/worker/context';
-import DurableObject from '@/worker/durable-object';
 import RootRpc from '@/worker/rpc';
 
 const fetchRpc = async (rpc: Rpc, req: Request): Promise<Response> => {
@@ -93,5 +92,4 @@ const handler = {
 	}
 };
 
-export { DurableObject };
 export default handler;

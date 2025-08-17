@@ -3,21 +3,7 @@
 	"name": "react-tailwind-client",
 	"compatibility_date": "2025-03-10",
 	"compatibility_flags": ["nodejs_compat"],
-	"durable_objects": {
-		"bindings": [
-			{
-				"name": "DO",
-				"class_name": "DurableObject"
-			}
-		]
-	},
 	"main": "worker/index.ts",
-	"migrations": [
-		{
-			"tag": "v1",
-			"new_classes": ["DurableObject"]
-		}
-	],
 	"assets": {
 		"binding": "ASSETS",
 		"directory": "public",
