@@ -58,7 +58,7 @@ const handler = {
 			{
 				lang
 			},
-			() => {
+			async () => {
 				try {
 					i18n.load(lang);
 
@@ -68,7 +68,7 @@ const handler = {
 					) {
 						const rpc = new RootRpc();
 
-						return fetchRpc(rpc, request);
+						return await fetchRpc(rpc, request);
 					}
 
 					return env.ASSETS.fetch(request);
