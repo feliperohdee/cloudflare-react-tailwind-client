@@ -54,31 +54,23 @@ const handler = {
 			return i18n.supports(lang) ? lang : 'en-us';
 		})();
 
-		const res = await context.run(
-			{
-				lang
-			},
-			async () => {
-				try {
-					i18n.load(lang);
+		const res = await context.run({ lang }, async () => {
+			try {
+				i18n.load(lang);
 
-					if (
-						request.method === 'POST' &&
-						url.pathname === '/api/rpc'
-					) {
-						const rpc = new RootRpc();
+				if (request.method === 'POST' && url.pathname === '/api/rpc') {
+					const rpc = new RootRpc();
 
-						return await fetchRpc(rpc, request);
-					}
-
-					return env.ASSETS.fetch(request);
-				} catch (err) {
-					const httpError = HttpError.wrap(err as Error);
-
-					return httpError.toResponse();
+					return await fetchRpc(rpc, request);
 				}
+
+				return env.ASSETS.fetch(request);
+			} catch (err) {
+				const httpError = HttpError.wrap(err as Error);
+
+				return httpError.toResponse();
 			}
-		);
+		});
 
 		// if the lang is set in the url, set it in the cookie to persist user language choice
 		if (url.searchParams.has('lang')) {
