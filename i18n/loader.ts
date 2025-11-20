@@ -1,42 +1,24 @@
-import isNil from 'lodash/isNil';
-import isString from 'lodash/isString';
+import enUS from '@/i18n/en-us.json';
+import esES from '@/i18n/es-es.json';
+import ptBR from '@/i18n/pt-br.json';
+
+const i18n = {
+	'en-us': enUS,
+	'es-es': esES,
+	'pt-br': ptBR
+};
 
 let cache: Record<string, string> = {};
 let translations: Record<string, string> = {};
 
-const load = (newTranslations: Record<string, string>) => {
+const load = (lang: SupportedLang) => {
 	cache = {};
-	translations = newTranslations;
-
-	const __ = (
-		key: string,
-		args?: Record<string, string | number>
-	): string => {
-		const cacheKey = args ? `${key}:${JSON.stringify(args)}` : key;
-
-		if (cache[cacheKey]) {
-			return cache[cacheKey];
-		}
-
-		let value = translations[key] || key;
-
-		if (args && isString(value)) {
-			value = value.replace(/\{\{\s?(\w+)\s?\}\}/g, (sub, param) => {
-				return `${!isNil(args[param]) ? args[param] : ''}`;
-			});
-
-			value = value.replace(/\{\s?(\w+)\s?\}/g, (sub, param) => {
-				return `${!isNil(args[param]) ? args[param] : ''}`;
-			});
-		}
-
-		cache[cacheKey] = value;
-
-		return value;
-	};
-
-	// @ts-expect-error
-	self.__ = __;
+	translations = i18n[lang] ?? enUS;
 };
 
-export default { load };
+const supports = (lang: string): lang is SupportedLang => {
+	return lang in i18n;
+};
+
+export type SupportedLang = keyof typeof i18n;
+export default { cache, load, supports, translations };

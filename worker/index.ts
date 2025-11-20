@@ -1,6 +1,6 @@
 import cookies from 'use-request-utils/cookies';
 import HttpError from 'use-http-error';
-import i18n from '@/i18n';
+import i18nLoader from '@/i18n/loader';
 import isPlainObject from 'lodash/isPlainObject';
 import Rpc from 'use-request-utils/rpc';
 
@@ -51,12 +51,12 @@ const handler = {
 				request.headers.get('accept-language') ||
 				'';
 
-			return i18n.supports(lang) ? lang : 'en-us';
+			return i18nLoader.supports(lang) ? lang : 'en-us';
 		})();
 
 		const res = await context.run({ lang }, async () => {
 			try {
-				i18n.load(lang);
+				i18nLoader.load(lang);
 
 				if (request.method === 'POST' && url.pathname === '/api/rpc') {
 					const rpc = new RootRpc();

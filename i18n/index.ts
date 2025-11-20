@@ -1,22 +1,31 @@
-import enUS from '@/i18n/en-us.json';
-import ptBR from '@/i18n/pt-br.json';
+import isNil from 'lodash/isNil';
+import isString from 'lodash/isString';
 
-import loader from '@/i18n/loader';
+import loader, { type SupportedLang } from '@/i18n/loader';
 
-const i18n = {
-	'en-us': enUS,
-	'pt-br': ptBR
+const __ = (key: string, args?: Record<string, string | number>): string => {
+	const cacheKey = args ? `${key}:${JSON.stringify(args)}` : key;
+
+	if (loader.cache[cacheKey]) {
+		return loader.cache[cacheKey];
+	}
+
+	let value = loader.translations[key] || key;
+
+	if (args && isString(value)) {
+		value = value.replace(/\{\{\s?(\w+)\s?\}\}/g, (sub, param) => {
+			return `${!isNil(args[param]) ? args[param] : ''}`;
+		});
+
+		value = value.replace(/\{\s?(\w+)\s?\}/g, (sub, param) => {
+			return `${!isNil(args[param]) ? args[param] : ''}`;
+		});
+	}
+
+	loader.cache[cacheKey] = value;
+
+	return value;
 };
-
-const load = (lang: SupportedLang) => {
-	loader.load(i18n[lang]);
-};
-
-const supports = (lang: string): lang is SupportedLang => {
-	return lang in i18n;
-};
-
-type SupportedLang = keyof typeof i18n;
 
 export type { SupportedLang };
-export default { load, supports };
+export default __;
