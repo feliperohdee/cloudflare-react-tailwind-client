@@ -10,14 +10,17 @@ const i18n = {
 
 const store: {
 	cache: Record<string, string>;
+	lang: SupportedLang;
 	translations: Record<string, string>;
 } = {
 	cache: {},
+	lang: 'en-us',
 	translations: {}
 };
 
 const load = (lang: SupportedLang) => {
 	store.cache = {};
+	store.lang = lang;
 	store.translations = i18n[lang] ?? enUS;
 };
 
