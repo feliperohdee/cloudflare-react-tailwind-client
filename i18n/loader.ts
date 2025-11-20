@@ -8,12 +8,17 @@ const i18n = {
 	'pt-br': ptBR
 };
 
-let cache: Record<string, string> = {};
-let translations: Record<string, string> = {};
+const store: {
+	cache: Record<string, string>;
+	translations: Record<string, string>;
+} = {
+	cache: {},
+	translations: {}
+};
 
 const load = (lang: SupportedLang) => {
-	cache = {};
-	translations = i18n[lang] ?? enUS;
+	store.cache = {};
+	store.translations = i18n[lang] ?? enUS;
 };
 
 const supports = (lang: string): lang is SupportedLang => {
@@ -21,4 +26,4 @@ const supports = (lang: string): lang is SupportedLang => {
 };
 
 export type SupportedLang = keyof typeof i18n;
-export default { cache, load, supports, translations };
+export default { load, store, supports };

@@ -1,16 +1,15 @@
 import isNil from 'lodash/isNil';
 import isString from 'lodash/isString';
-
 import loader, { type SupportedLang } from '@/i18n/loader';
 
 const __ = (key: string, args?: Record<string, string | number>): string => {
 	const cacheKey = args ? `${key}:${JSON.stringify(args)}` : key;
 
-	if (loader.cache[cacheKey]) {
-		return loader.cache[cacheKey];
+	if (loader.store.cache[cacheKey]) {
+		return loader.store.cache[cacheKey];
 	}
 
-	let value = loader.translations[key] || key;
+	let value = loader.store.translations[key] || key;
 
 	if (args && isString(value)) {
 		value = value.replace(/\{\{\s?(\w+)\s?\}\}/g, (sub, param) => {
@@ -22,7 +21,7 @@ const __ = (key: string, args?: Record<string, string | number>): string => {
 		});
 	}
 
-	loader.cache[cacheKey] = value;
+	loader.store.cache[cacheKey] = value;
 
 	return value;
 };
