@@ -73,7 +73,6 @@ This will start the Vite development server at http://localhost:3000 with hot mo
 ├── app/                  # React frontend application
 │   ├── components/       # React components
 │   │   └── ui/           # shadcn/ui components
-│   ├── hooks/            # Custom React hooks (including use-rpc)
 │   ├── pages/            # Page components
 │   └── styles/           # Global styles
 │
