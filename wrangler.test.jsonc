@@ -1,0 +1,16 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "react-tailwind-client",
+	"compatibility_date": "2025-10-11",
+	"compatibility_flags": [
+		"enable_nodejs_fs_module",
+		"enable_nodejs_http_modules",
+		"enable_nodejs_perf_hooks_module",
+		"enable_nodejs_tty_module",
+		"nodejs_compat"
+	],
+	"main": "worker/index.ts",
+	"vars": {
+		"PRODUCTION": "true"
+	}
+}

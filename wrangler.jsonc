@@ -1,7 +1,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "react-tailwind-client",
-	"compatibility_date": "2025-03-10",
+	"compatibility_date": "2025-10-11",
 	"compatibility_flags": ["nodejs_compat"],
 	"main": "worker/index.ts",
 	"assets": {
