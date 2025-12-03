@@ -1,3 +1,4 @@
+import { env } from 'cloudflare:workers';
 import cookies from 'use-request-utils/cookies';
 import HttpError from 'use-http-error';
 import i18nLoader from '@/i18n/loader';
@@ -40,7 +41,7 @@ const fetchRpc = async (rpc: Rpc, req: Request): Promise<Response> => {
 };
 
 const handler = {
-	async fetch(request: Request, env: Env): Promise<Response> {
+	async fetch(request: Request): Promise<Response> {
 		HttpError.setIncludeStack(env.PRODUCTION === 'false');
 
 		const url = new URL(request.url);
