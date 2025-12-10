@@ -1,7 +1,7 @@
 import AuthJwt from 'use-request-utils/auth-jwt';
 import Rpc from 'use-request-utils/rpc';
 
-class Root extends Rpc {
+class RootRpc extends Rpc {
 	private auth: AuthJwt;
 
 	constructor() {
@@ -58,4 +58,4 @@ class Root extends Rpc {
 	}
 }
 
-export default Root;
+export default RootRpc;
