@@ -1,11 +1,11 @@
 import { env } from 'cloudflare:workers';
 import cookies from 'use-request-utils/cookies';
 import HttpError from 'use-http-error';
-import i18nLoader from '@/i18n/loader';
 import isPlainObject from 'lodash/isPlainObject';
 import Rpc from 'use-request-utils/rpc';
 
 import context from '@/worker/context';
+import i18nLoader from '@/i18n/loader';
 import RootRpc from '@/worker/rpc';
 
 const fetchRpc = async (rpc: Rpc, req: Request): Promise<Response> => {
