@@ -1,3 +1,5 @@
+import HttpError from 'use-http-error';
+
 import AuthJwt from 'use-request-utils/auth-jwt';
 import Rpc from 'use-request-utils/rpc';
 
@@ -33,7 +35,11 @@ class RootRpc extends Rpc {
 	}
 
 	async signin({ email, password }: { email: string; password: string }) {
-		const res = await this.auth.sign({ email, password });
+		if (password !== '[YOU_PASSWORD_CHECK_RULE]') {
+			throw new HttpError(401, 'Invalid password');
+		}
+
+		const res = await this.auth.sign({ email });
 
 		return this.createResponse(
 			{
