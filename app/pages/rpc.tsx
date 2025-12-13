@@ -1,6 +1,6 @@
 import { Code2 } from 'lucide-react';
 import { toast } from 'use-toastr';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useFetchRpc from 'use-request-utils/use-fetch-rpc';
 import useRpc from 'use-request-utils/use-rpc';
 
@@ -8,7 +8,7 @@ import { Button } from '@/app/components/ui/button';
 import Footer from '@/app/components/footer';
 import Hero from '@/app/components/hero';
 import Nav from '@/app/components/nav';
-import type RootRpc from '@/worker/rpc';
+import type Rpc from '@/worker/rpc';
 import {
 	Card,
 	CardContent,
@@ -18,40 +18,60 @@ import {
 
 const RpcPage = () => {
 	const [message, setMessage] = useState('Cloudflare');
-	const { fetchRpc } = useFetchRpc<RootRpc>();
-	const rpc = useRpc<RootRpc>();
-	const {
-		data,
-		error,
-		fetch,
-		fetchTimes,
-		lastFetchDuration,
-		loading,
-		setData
-	} = fetchRpc(
+	const rpc = useRpc<Rpc>();
+	const { lazyFetchRpc, fetchRpc } = useFetchRpc<Rpc>();
+	const { data, fetch, lastFetchDuration, loading, setData } = fetchRpc(
 		(rpc, input?: { message: string }) => {
+			toast.loading('Connecting to worker...', {
+				id: 'loading'
+			});
+
 			return rpc.hello(input ?? { message });
 		},
 		{
+			effect: ({ data, error }) => {
+				if (data) {
+					toast.success(`Received from worker: ${data.message}`, {
+						closeButton: true,
+						id: 'loading'
+					});
+				} else if (error) {
+					toast.error(`Worker error: ${error.toString()}`, {
+						closeButton: true,
+						id: 'loading'
+					});
+				}
+			},
 			triggerDeps: [message]
 		}
 	);
 
-	useEffect(() => {
-		if (loading) {
-			toast.loading('Connecting to worker...', {
-				id: `loading-${fetchTimes}`
+	const signin = lazyFetchRpc(
+		(rpc, input?: { email: string; password: string }) => {
+			toast.loading('Signing in...', {
+				id: 'signin'
 			});
-		} else if (data) {
-			toast.success(`Received from worker: ${data.message}`, {
-				id: `loading-${fetchTimes}`
-			});
-		} else if (error) {
-			toast.error(`Worker error: ${error.toString()}`, {
-				id: `loading-${fetchTimes}`
-			});
+
+			return rpc.signin(
+				input ?? { email: 'test@test.com', password: 'password' }
+			);
+		},
+		{
+			effect: ({ data, error }) => {
+				if (data) {
+					toast.info(`Signed in: ${data.email}`, {
+						closeButton: true,
+						id: 'signin'
+					});
+				} else if (error) {
+					toast.error(`Signin error: ${error.toString()}`, {
+						closeButton: true,
+						id: 'signin'
+					});
+				}
+			}
 		}
-	}, [loading, data, error, fetchTimes]);
+	);
 
 	return (
 		<div className='min-h-screen bg-black text-gray-200'>
@@ -170,21 +190,47 @@ const RpcPage = () => {
 							<div className='flex gap-3'>
 								<Button
 									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									disabled={signin.loading}
 									onClick={async () => {
-										const res = await rpc.signin({
+										const res = await signin.fetch({
 											email: 'test@test.com',
 											password: 'password'
 										});
 
-										toast.info(`Signed in: ${res.email}`, {
-											closeButton: true,
-											id: `signin-${fetchTimes}`
-										});
-
-										setTimeout(fetch);
+										if (res) {
+											setTimeout(fetch);
+										}
 									}}
 								>
 									Simulate Signin
+								</Button>
+
+								<Button
+									className='flex-1 bg-blue-600 hover:bg-blue-700'
+									onClick={async () => {
+										try {
+											const res =
+												await rpc.admin.getSession();
+
+											toast.info(
+												`Session: ${JSON.stringify(res, null, 2)}`,
+												{
+													closeButton: true,
+													id: 'get-session'
+												}
+											);
+										} catch (error) {
+											toast.error(
+												`Error: ${(error as Error).toString()}`,
+												{
+													closeButton: true,
+													id: 'get-session'
+												}
+											);
+										}
+									}}
+								>
+									Get Session
 								</Button>
 
 								<Button
@@ -194,7 +240,7 @@ const RpcPage = () => {
 
 										toast.info('Signed out', {
 											closeButton: true,
-											id: `signout-${fetchTimes}`
+											id: 'signout'
 										});
 
 										setTimeout(fetch);
@@ -202,37 +248,6 @@ const RpcPage = () => {
 								>
 									Simulate Signout
 								</Button>
-							</div>
-
-							{/* Code Example */}
-							<div className='mt-6'>
-								<div className='mb-2 flex items-center justify-between'>
-									<h3 className='text-sm font-medium text-gray-300'>
-										Implementation Example
-									</h3>
-								</div>
-								<div className='rounded-lg border border-gray-800 bg-gray-950 p-4'>
-									<pre className='overflow-auto font-mono text-sm text-gray-300'>
-										{`// Frontend Code
-const { resource, rpc } = useRpc();
-const { data, loading, fetch } = resource('hello', {
-  message: '${message}'
-});
-
-// Worker RPC Implementation
-class Rpc {
-  async hello({ message }: { message: string }) {
-    return { message: \`Hello, \${message}!\` }
-  }
-}`}
-									</pre>
-								</div>
-								<p className='mt-3 text-sm text-gray-400'>
-									Type-safe RPC calls provide end-to-end type
-									safety between your React frontend and
-									Cloudflare Worker backend, with automatic
-									code generation.
-								</p>
 							</div>
 						</div>
 					</CardContent>
