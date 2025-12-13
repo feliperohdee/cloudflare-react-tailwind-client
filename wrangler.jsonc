@@ -9,12 +9,6 @@
 		"directory": "public",
 		"not_found_handling": "single-page-application"
 	},
-	"observability": {
-		"enabled": true
-	},
-	"vars": {
-		"PRODUCTION": "true"
-	},
 	"d1_databases": [
 		{
 			"binding": "DB",
@@ -23,5 +17,32 @@
 			"migrations_dir": "./db/migrations",
 			"remote": true
 		}
-	]
+	],
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "DO",
+				"class_name": "Do"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": ["Do"]
+		}
+	],
+	"observability": {
+		"enabled": true
+	},
+	"rules": [
+		{
+			"fallthrough": true,
+			"globs": ["**/*.sql"],
+			"type": "Text"
+		}
+	],
+	"vars": {
+		"PRODUCTION": "true"
+	}
 }

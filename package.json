@@ -11,6 +11,7 @@
 		"db:backup:local": "wrangler d1 export db --local --output=./db/backups/backup-$(date +%Y%m%d-%H%M%S).sql",
 		"db:create": "wrangler d1 create db",
 		"db:generate": "drizzle-kit generate",
+		"db:generate:do": "drizzle-kit generate --config drizzle.config.do.ts",
 		"db:info": "wrangler d1 info db",
 		"db:list": "wrangler d1 list",
 		"db:migrate": "wrangler d1 migrations apply db --remote",

@@ -5,6 +5,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import Rpc from 'use-request-utils/rpc';
 
 import context from '@/worker/context';
+import Do from '@/worker/do';
 import i18nLoader from '@/i18n/loader';
 import RootRpc from '@/worker/rpc';
 
@@ -60,7 +61,7 @@ const handler = {
 				i18nLoader.load(lang);
 
 				if (request.method === 'POST' && url.pathname === '/api/rpc') {
-					const rpc = new RootRpc(env.DB);
+					const rpc = new RootRpc();
 
 					return await fetchRpc(rpc, request);
 				}
@@ -85,4 +86,5 @@ const handler = {
 	}
 };
 
+export { Do };
 export default handler;
