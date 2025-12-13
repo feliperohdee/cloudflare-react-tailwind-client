@@ -12,9 +12,6 @@
 	"observability": {
 		"enabled": true
 	},
-	"vars": {
-		"PRODUCTION": "true"
-	},
 	"d1_databases": [
 		{
 			"binding": "DB",
@@ -23,5 +20,15 @@
 			"migrations_dir": "./db/migrations",
 			"remote": true
 		}
-	]
+	],
+	"rules": [
+		{
+			"fallthrough": true,
+			"globs": ["**/*.sql"],
+			"type": "Text"
+		}
+	],
+	"vars": {
+		"PRODUCTION": "true"
+	}
 }

@@ -60,7 +60,7 @@ const handler = {
 				i18nLoader.load(lang);
 
 				if (request.method === 'POST' && url.pathname === '/api/rpc') {
-					const rpc = new RootRpc(env.DB);
+					const rpc = new RootRpc();
 
 					return await fetchRpc(rpc, request);
 				}
