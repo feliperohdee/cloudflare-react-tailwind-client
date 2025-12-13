@@ -10,22 +10,6 @@
 		"nodejs_compat"
 	],
 	"main": "worker/index.ts",
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_name": "db",
-			"database_id": "f5a94e93-c3c3-4c11-9b47-9f987d21e9cc",
-			"migrations_dir": "./db/migrations",
-			"remote": true
-		}
-	],
-	"rules": [
-		{
-			"fallthrough": true,
-			"globs": ["**/*.sql"],
-			"type": "Text"
-		}
-	],
 	"vars": {
 		"PRODUCTION": "true"
 	}

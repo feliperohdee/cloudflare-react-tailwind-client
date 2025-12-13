@@ -1,21 +1,14 @@
-import { drizzle, DrizzleD1Database } from 'drizzle-orm/d1';
-import { env } from 'cloudflare:workers';
-import { eq } from 'drizzle-orm';
-import bcrypt from 'bcryptjs';
 import HttpError from 'use-http-error';
 import Rpc from 'use-request-utils/rpc';
 import session from '@/worker/session';
 
 import AdminRpc from '@/worker/rpc/auth-rpc';
-import { users } from '@/db/schema';
 
 class RootRpc extends Rpc {
-	private db: DrizzleD1Database<{ users: typeof users }>;
 	public admin: AdminRpc;
 
 	constructor() {
 		super();
-		this.db = drizzle(env.DB, { schema: { users } });
 
 		this.admin = new AdminRpc();
 	}
@@ -39,24 +32,11 @@ class RootRpc extends Rpc {
 	}
 
 	async signin({ email, password }: { email: string; password: string }) {
-		const user = await this.db.query.users.findFirst({
-			where: eq(users.email, email)
-		});
-
-		if (!user) {
-			throw new HttpError(401, 'Invalid email or password');
+		if (password !== '[YOU_PASSWORD_CHECK_RULE]') {
+			throw new HttpError(401, 'Invalid password');
 		}
 
-		const validPassword = await this.verifyPassword(
-			password,
-			user.passwordHash
-		);
-
-		if (!validPassword) {
-			throw new HttpError(401, 'Invalid email or password');
-		}
-
-		const res = await session.sign({ email, namespace: user.namespace });
+		const res = await session.sign({ email, namespace: 'admin' });
 
 		return this.createResponse(
 			{
@@ -67,13 +47,6 @@ class RootRpc extends Rpc {
 				headers: res.headers
 			}
 		);
-	}
-
-	private async verifyPassword(
-		password: string,
-		hash: string
-	): Promise<boolean> {
-		return await bcrypt.compare(password, hash);
 	}
 
 	async signout() {
