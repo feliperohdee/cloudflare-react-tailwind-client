@@ -4,8 +4,9 @@ import HttpError from 'use-http-error';
 import isPlainObject from 'lodash/isPlainObject';
 import Rpc from 'use-request-utils/rpc';
 
+import { supportsI18nLang } from '@/i18n';
 import context from '@/worker/context';
-import i18nLoader from '@/i18n/loader';
+import ContextStorage from '@/worker/context-storage';
 import RootRpc from '@/worker/rpc';
 
 const fetchRpc = async (rpc: Rpc, req: Request): Promise<Response> => {
@@ -52,26 +53,30 @@ const handler = {
 				request.headers.get('accept-language') ||
 				'';
 
-			return i18nLoader.supports(lang) ? lang : 'en-us';
+			return supportsI18nLang(lang) ? lang : 'en-us';
 		})();
 
-		const res = await context.run({ lang }, async () => {
-			try {
-				i18nLoader.load(lang);
+		const res = await context.run(
+			new ContextStorage({ lang }),
+			async () => {
+				try {
+					if (
+						request.method === 'POST' &&
+						url.pathname === '/api/rpc'
+					) {
+						const rpc = new RootRpc();
 
-				if (request.method === 'POST' && url.pathname === '/api/rpc') {
-					const rpc = new RootRpc();
+						return await fetchRpc(rpc, request);
+					}
 
-					return await fetchRpc(rpc, request);
+					return env.ASSETS.fetch(request);
+				} catch (err) {
+					const httpError = HttpError.wrap(err as Error);
+
+					return httpError.toResponse();
 				}
-
-				return env.ASSETS.fetch(request);
-			} catch (err) {
-				const httpError = HttpError.wrap(err as Error);
-
-				return httpError.toResponse();
 			}
-		});
+		);
 
 		// if the lang is set in the url, set it in the cookie to persist user language choice
 		if (url.searchParams.has('lang')) {

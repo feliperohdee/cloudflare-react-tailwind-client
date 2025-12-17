@@ -3,7 +3,7 @@
 // Runtime types generated with workerd@1.20251210.0 2025-10-11 nodejs_compat
 declare namespace Cloudflare {
 	interface GlobalProps {
-		mainModule: typeof import("./worker/index");
+		mainModule: typeof import('./worker/index');
 	}
 	interface Env {
 		PRODUCTION: string;
@@ -12,12 +12,15 @@ declare namespace Cloudflare {
 }
 interface Env extends Cloudflare.Env {}
 type StringifyValues<EnvType extends Record<string, unknown>> = {
-	[Binding in keyof EnvType]: EnvType[Binding] extends string ? EnvType[Binding] : string;
+	[Binding in keyof EnvType]: EnvType[Binding] extends string
+		? EnvType[Binding]
+		: string;
 };
 declare namespace NodeJS {
-	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "PRODUCTION">> {}
+	interface ProcessEnv
+		extends StringifyValues<Pick<Cloudflare.Env, 'PRODUCTION'>> {}
 }
-declare module "*.sql" {
+declare module '*.sql' {
 	const value: string;
 	export default value;
 }
