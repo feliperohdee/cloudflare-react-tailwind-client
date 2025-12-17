@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
 	createExecutionContext,
-	env,
 	SELF,
 	waitOnExecutionContext
 } from 'cloudflare:test';
@@ -27,7 +26,7 @@ describe('/worker', () => {
 		});
 
 		const ctx = createExecutionContext();
-		const response = await worker.fetch(request, env);
+		const response = await worker.fetch(request);
 
 		await waitOnExecutionContext(ctx);
 		expect(await response.json()).toEqual({

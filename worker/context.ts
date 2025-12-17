@@ -1,11 +1,9 @@
 import { AsyncLocalStorage } from 'async_hooks';
 
-type ContextStore = {
-	lang: string;
-};
+import ContextStorage from '@/worker/context-storage';
 
 class Context {
-	private storage = new AsyncLocalStorage<ContextStore>();
+	public storage = new AsyncLocalStorage<ContextStorage>();
 
 	get store() {
 		const store = this.storage.getStore();
@@ -17,9 +15,9 @@ class Context {
 		return store;
 	}
 
-	run<R>(args: ContextStore, fn: () => R): R;
-	run<R>(args: ContextStore, fn: () => Promise<R>): Promise<R> {
-		return this.storage.run(args, fn);
+	run<R>(store: ContextStorage, fn: () => R): R;
+	run<R>(store: ContextStorage, fn: () => Promise<R>): Promise<R> {
+		return this.storage.run(store, fn);
 	}
 }
 
