@@ -4,18 +4,16 @@ import { createRoot } from 'react-dom/client';
 import { StrictMode } from 'react';
 import { Toastr } from 'use-toastr';
 
-import { browserI18nLoader, supportsI18nLang } from '@/i18n';
 import cookies from '@/app/libs/cookies';
+import resolveLang from '@/app/libs/resolve-lang';
 import Router from '@/app/router';
 
 (() => {
-	const lang = (() => {
-		const lang = cookies.get('lang');
+	const urlLang =
+		new URLSearchParams(window.location.search).get('lang') || '';
+	const cookieLang = cookies.get('lang');
 
-		return supportsI18nLang(lang) ? lang : 'en-us';
-	})();
-
-	browserI18nLoader.load(lang);
+	resolveLang(urlLang || cookieLang);
 	createRoot(document.getElementById('root')!).render(
 		<StrictMode>
 			<Router />
